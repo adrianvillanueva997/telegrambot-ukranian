@@ -1,0 +1,29 @@
+{
+  "name": "telegrambot-ukranian",
+  "version": "1.0.0",
+  "description": "Improved version of the original bot which was made in Python",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --poll src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianvillanueva997/telegrambot-ukranian.git"
+  },
+  "author": "Adrián Villanueva Martínez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianvillanueva997/telegrambot-ukranian/issues"
+  },
+  "homepage": "https://github.com/adrianvillanueva997/telegrambot-ukranian#readme",
+  "dependencies": {
+    "@types/node": "^13.14.19",
+    "axios": "^0.21.1",
+    "telegraf": "^3.38.0",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
