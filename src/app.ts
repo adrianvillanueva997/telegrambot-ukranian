@@ -112,7 +112,7 @@ app.command('call', async (ctx) => {
             return r as []
         })
         const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
-        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @dark_trainer"})
+        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @darktrainer"})
     } catch (err) {
         await sendErrorMessage(ctx, err)
     }
@@ -126,7 +126,7 @@ app.command('cs', async (ctx) => {
         })
         const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
         await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe " +
-                ",@dark_trainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",})
+                ",@darktrainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",})
     } catch (err) {
         await sendErrorMessage(ctx, err)
     }
