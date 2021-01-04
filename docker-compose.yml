@@ -2,12 +2,14 @@ version: '3'
 services:
   bot:
     restart: unless-stopped
-    image: adrianvillanueva997/telegrambot_ukranianmeme
+    image: adrianvillanueva997/telegrambot_ukranian
     container_name: telegram_ukranian_PROD
     networks:
       - bots
     env_file:
       - .env
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 networks:
   bots:
     external: true
