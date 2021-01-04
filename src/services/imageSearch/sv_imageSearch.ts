@@ -1,30 +1,33 @@
-const gis = require('g-i-s');
-const util = require('util');
+import {InputFile} from "telegraf/typings/telegram-types";
 
-interface imageQuery {
+const gis = require('g-i-s');
+import axios from "axios";
+
+interface imageData {
     url: string,
-    width: number
+    width: number,
     height: number
 }
 
-
 export class ImageSearch {
-    public urls = {}
-
     constructor() {
     }
 
     async getImage(queryParam: string) {
-        const test = util.promisify(gis(queryParam, this.logResults))
-        await console.log(test)
+        return new Promise((resolve, reject) => {
+            gis(queryParam, (error: any, results: any) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(results)
+                }
+            })
+        })
     }
 
-    logResults(error: any, results: any) {
-        if (error) {
-            console.log(error);
-        } else {
-            return (JSON.stringify(results, null, '  '));
-        }
+    async getRandomImage(imageUrl: imageData) {
+        return imageUrl.url
+
     }
 
 }

@@ -6,6 +6,8 @@ import {commandArgsParser} from "./middleware/md_commandsArgument";
 import {OpenWeather} from "./services/openWeather/sv_OpenWeather";
 import {argsChecker} from "./middleware/md_argsChecker";
 import {ImageSearch} from "./services/imageSearch/sv_imageSearch";
+import {randomInt} from "crypto";
+import {getRandomInt} from "./utilities/randomizer";
 
 
 const app = new Telegraf(process.env.TelegramBot_Ukranian_Key!);
@@ -23,6 +25,7 @@ app.command('weather', async (ctx) => {
     if (args != null) {
         try {
             argsChecker(args, 1);
+
             const ow = await new OpenWeather().getWeather(args.arguments[0])
             if (ow.status === 404) {
                 await ctx.telegram.sendMessage(ctx.message!.chat.id, `City "${args.arguments[0]}" not found!`)
@@ -47,11 +50,16 @@ app.command('weather', async (ctx) => {
 
 app.command('get', async (ctx) => {
     const args = commandArgsParser(ctx);
+    await ctx.telegram.sendChatAction(ctx.message!.chat.id, "upload_photo")
     if (args != null){
         try{
             argsChecker(args, 1);
             const imageSearch = new ImageSearch();
-            await imageSearch.getImage(args.arguments[0])
+            const images = await imageSearch.getImage(args.arguments[0]).then((r) => {
+                return r as []
+            })
+            const image = await imageSearch.getRandomImage(images[getRandomInt(0,images.length-1)])
+            await ctx.telegram.sendPhoto(ctx.message!.chat.id,image, {caption: image,parse_mode:"HTML"})
         }catch (err){
             await ctx.telegram.sendMessage(ctx.message!.chat.id, err.toString());
         }
