@@ -136,7 +136,7 @@ app.command('cs', async (ctx) => {
             image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
         await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
             caption: "(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe " +
-                ",@dark_trainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",
+                ",@darktrainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",
         })
     } catch (err) {
         await sendErrorMessage(ctx, err)
