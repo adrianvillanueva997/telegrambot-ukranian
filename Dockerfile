@@ -1,11 +1,18 @@
 # Multistage docker image building
 # build-env -> dist
-# TODO do multistage building image
-# For now it is single image building since it is in beta
-FROM node:14.9-alpine
-WORKDIR /app
+
+FROM node:14.9-alpine as base
+# Building container
+FROM base as builder
+WORKDIR /build
 COPY package.json .
 RUN npm install
 COPY . .
-CMD ["npm","start"]
+RUN npm run build
 
+# Production container
+FROM base as dist
+WORKDIR /app
+COPY package.json .
+COPY --from=builder /build/dist ./dist
+CMD ["npm", "run", "run"]

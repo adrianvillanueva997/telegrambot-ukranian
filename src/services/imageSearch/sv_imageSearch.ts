@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const gis = require('g-i-s');
 
 interface imageData {
@@ -9,6 +11,7 @@ interface imageData {
 export class ImageSearch {
     constructor() {
     }
+
     async getImage(queryParam: string) {
         return new Promise((resolve, reject) => {
             gis(queryParam, (error: any, results: any) => {
@@ -20,8 +23,19 @@ export class ImageSearch {
             })
         })
     }
+
     async getRandomImage(imageUrl: imageData) {
         return imageUrl.url
+    }
+
+    async checkImageStatus(imageUrl: string) {
+        try {
+            return await axios.get(imageUrl).then(r => {
+                return r.status;
+            });
+        } catch (err) {
+        }
+        return null
     }
 
 }

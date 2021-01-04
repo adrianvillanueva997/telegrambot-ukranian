@@ -68,7 +68,10 @@ app.command('get', async (ctx) => {
             const images = await imageSearch.getImage(joinedArgs).then((r) => {
                 return r as []
             })
-            const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+            let image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+            const imageStatus = await imageSearch.checkImageStatus(image)
+            if (imageStatus != 200 || imageStatus == null)
+                image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
             await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: image, parse_mode: "HTML"})
         } catch (err) {
             await sendErrorMessage(ctx, err)
@@ -111,7 +114,10 @@ app.command('call', async (ctx) => {
         const images = await imageSearch.getImage("dota 2 memes").then((r) => {
             return r as []
         })
-        const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        let image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        const imageStatus = await imageSearch.checkImageStatus(image)
+        if (imageStatus != 200 || imageStatus == null)
+            image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
         await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @dark_trainer"})
     } catch (err) {
         await sendErrorMessage(ctx, err)
@@ -124,9 +130,14 @@ app.command('cs', async (ctx) => {
         const images = await imageSearch.getImage("csgo memes").then((r) => {
             return r as []
         })
-        const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
-        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe " +
-                ",@dark_trainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",})
+        let image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        const imageStatus = await imageSearch.checkImageStatus(image)
+        if (imageStatus != 200 || imageStatus == null)
+            image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
+            caption: "(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe " +
+                ",@dark_trainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",
+        })
     } catch (err) {
         await sendErrorMessage(ctx, err)
     }
