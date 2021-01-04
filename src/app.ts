@@ -118,7 +118,7 @@ app.command('call', async (ctx) => {
         const imageStatus = await imageSearch.checkImageStatus(image)
         if (imageStatus != 200 || imageStatus == null)
             image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
-        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @dark_trainer"})
+        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @darktrainer"})
     } catch (err) {
         await sendErrorMessage(ctx, err)
     }
