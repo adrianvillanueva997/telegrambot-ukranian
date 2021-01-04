@@ -105,4 +105,31 @@ app.command('getfunnyshit', async (ctx) => {
     }
 })
 
+app.command('call', async (ctx) => {
+    try {
+        const imageSearch = new ImageSearch();
+        const images = await imageSearch.getImage("dota 2 memes").then((r) => {
+            return r as []
+        })
+        const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @dark_trainer"})
+    } catch (err) {
+        await sendErrorMessage(ctx, err)
+    }
+})
+
+app.command('cs', async (ctx) => {
+    try {
+        const imageSearch = new ImageSearch();
+        const images = await imageSearch.getImage("csgo memes").then((r) => {
+            return r as []
+        })
+        const image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)])
+        await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {caption: "(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe " +
+                ",@dark_trainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD",})
+    } catch (err) {
+        await sendErrorMessage(ctx, err)
+    }
+})
+
 app.launch().then(r => console.log("Bot running!"))
