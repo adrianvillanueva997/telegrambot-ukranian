@@ -1,23 +1,11 @@
 # Multistage docker image building
 # build-env -> dist
-
-FROM node:14.9-alpine as base
-# Build container
-FROM base as build-env
-RUN apk --no-cache update && apk add python make g++ && rm -rf
-WORKDIR /build
+# TODO do multistage building image
+# For now it is single image building since it is in beta
+FROM node:14.9-alpine
+WORKDIR /app
 COPY package.json .
-COPY .babelrc .
 RUN npm install
 COPY . .
-RUN npm run build
+CMD ["npm","start"]
 
-# Production container (Dist)
-FROM base as dist
-WORKDIR /app
-COPY package.json ./
-COPY .babelrc ./
-COPY .env .
-RUN npm install
-COPY --from=build-env /build/dist ./dist
-CMD [ "npm", "start" ]

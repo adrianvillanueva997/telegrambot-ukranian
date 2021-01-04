@@ -1,7 +1,4 @@
-import {InputFile} from "telegraf/typings/telegram-types";
-
 const gis = require('g-i-s');
-import axios from "axios";
 
 interface imageData {
     url: string,
@@ -12,7 +9,6 @@ interface imageData {
 export class ImageSearch {
     constructor() {
     }
-
     async getImage(queryParam: string) {
         return new Promise((resolve, reject) => {
             gis(queryParam, (error: any, results: any) => {
@@ -24,10 +20,8 @@ export class ImageSearch {
             })
         })
     }
-
     async getRandomImage(imageUrl: imageData) {
         return imageUrl.url
-
     }
 
 }

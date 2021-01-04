@@ -1,32 +1,35 @@
 import {Telegraf} from "telegraf";
 require('dotenv').config();
-const emoji = require('node-emoji');
 
 import {commandArgsParser} from "./middleware/md_commandsArgument";
 import {OpenWeather} from "./services/openWeather/sv_OpenWeather";
 import {argsChecker} from "./middleware/md_argsChecker";
 import {ImageSearch} from "./services/imageSearch/sv_imageSearch";
-import {randomInt} from "crypto";
 import {getRandomInt} from "./utilities/randomizer";
+import {joinArgs} from "./middleware/md_argsJoiner";
 
 
 const app = new Telegraf(process.env.TelegramBot_Ukranian_Key!);
 
 app.command('test', async (ctx) => {
     const args = commandArgsParser(ctx);
-    console.log(args)
+    if (args != null){
+        const joinedArgs = joinArgs(args?.arguments);
+        console.log(joinedArgs)
+    }
     await ctx.telegram.sendMessage(ctx.message!.chat.id, "Patata",
         {reply_to_message_id: ctx.message!.message_id}
     ).then()
 })
 
 app.command('weather', async (ctx) => {
+    await ctx.telegram.sendChatAction(ctx.message!.chat.id, "typing")
     const args = commandArgsParser(ctx);
     if (args != null) {
         try {
-            argsChecker(args, 1);
-
-            const ow = await new OpenWeather().getWeather(args.arguments[0])
+            argsChecker(args, 1,1);
+            const joinedArgs = joinArgs(args.arguments);
+            const ow = await new OpenWeather().getWeather(joinedArgs)
             if (ow.status === 404) {
                 await ctx.telegram.sendMessage(ctx.message!.chat.id, `City "${args.arguments[0]}" not found!`)
             } else if (ow.status === 200) {
@@ -53,9 +56,10 @@ app.command('get', async (ctx) => {
     await ctx.telegram.sendChatAction(ctx.message!.chat.id, "upload_photo")
     if (args != null){
         try{
-            argsChecker(args, 1);
+            argsChecker(args, 1, 1);
+            const joinedArgs = joinArgs(args.arguments);
             const imageSearch = new ImageSearch();
-            const images = await imageSearch.getImage(args.arguments[0]).then((r) => {
+            const images = await imageSearch.getImage(joinedArgs).then((r) => {
                 return r as []
             })
             const image = await imageSearch.getRandomImage(images[getRandomInt(0,images.length-1)])

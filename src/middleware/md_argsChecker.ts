@@ -9,13 +9,13 @@ interface requiredArgs {
     }
 }
 
-export const argsChecker = (commands: commandData, argsNumber: number) => {
+export const argsChecker = (commands: commandData, argsNumber: number, minimalArgs : number) => {
     const checking = {
         commandData: commands,
         checking: {
             requiredArgs: argsNumber,
             receivedArgs: commands.arguments.length,
-            checkStatus: commands.arguments.length === argsNumber
+            checkStatus: commands.arguments.length >= minimalArgs
         }
     } as requiredArgs
     if (!checking.checking.checkStatus){

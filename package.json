@@ -4,7 +4,8 @@
   "description": "Improved version of the original bot which was made in Python",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --poll src/app.ts"
+    "start": "ts-node-dev --poll src/app.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
