@@ -2,10 +2,12 @@ version: '3'
 services:
   wikired_api:
     restart: unless-stopped
-    image: adrianvillanueva997/wikired-api
+    image: wikired_api_dev
     container_name: wikired_api
     networks:
       - bots
+    ports:
+      - 80
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     volumes:
@@ -13,7 +15,7 @@ services:
       - ./wikired.json:/app/wikired.json
   bot:
     restart: unless-stopped
-    image: adrianvillanueva997/telegrambot_ukranianmeme
+    image: telegram_bot_dev
     container_name: telegram_ukranian_PROD
     networks:
       - bots

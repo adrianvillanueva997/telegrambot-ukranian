@@ -9,6 +9,7 @@ import {ImageSearch} from "./services/imageSearch/sv_imageSearch";
 import {getRandomInt} from "./utilities/randomizer";
 import {joinArgs} from "./middleware/md_argsJoiner";
 import {Chan} from "./services/4chan/sv_4chan";
+import {Wikired} from "./services/wikired/sv_wikired";
 
 
 const app = new Telegraf(process.env.TelegramBot_Ukranian_Key!);
@@ -110,6 +111,7 @@ app.command('getfunnyshit', async (ctx) => {
 
 app.command('call', async (ctx) => {
     try {
+        await ctx.telegram.sendChatAction(ctx.message!.chat.id, "upload_photo")
         const imageSearch = new ImageSearch();
         const images = await imageSearch.getImage("dota 2 memes").then((r) => {
             return r as []
@@ -126,6 +128,7 @@ app.command('call', async (ctx) => {
 
 app.command('cs', async (ctx) => {
     try {
+        await ctx.telegram.sendChatAction(ctx.message!.chat.id, "upload_photo")
         const imageSearch = new ImageSearch();
         const images = await imageSearch.getImage("csgo memes").then((r) => {
             return r as []
@@ -144,6 +147,26 @@ app.command('cs', async (ctx) => {
 })
 
 app.command('wikired', async (ctx) => {
-
+    try {
+        await ctx.telegram.sendChatAction(ctx.message!.chat.id, "typing")
+        const wikired = new Wikired();
+        const text = await wikired.wikired();
+        await ctx.telegram.sendMessage(ctx.message!.chat.id, text);
+    } catch (err) {
+        await sendErrorMessage(ctx, err)
+    }
 })
+
+app.command('ukranian', async (ctx) => {
+    try {
+        await ctx.telegram.sendChatAction(ctx.message!.chat.id, "typing")
+        const wikired = new Wikired();
+        const text = await wikired.ukranian();
+        await ctx.telegram.sendMessage(ctx.message!.chat.id, text);
+    } catch (err) {
+        await sendErrorMessage(ctx, err)
+    }
+})
+
 app.launch().then(r => console.log("Bot running!"))
+
