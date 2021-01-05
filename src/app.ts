@@ -143,4 +143,7 @@ app.command('cs', async (ctx) => {
     }
 })
 
+app.command('wikired', async (ctx) => {
+
+})
 app.launch().then(r => console.log("Bot running!"))
