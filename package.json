@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev --poll src/app.ts",
     "build": "tsc -p .",
-    "run": "node dist/app.js"
+    "prod": "node dist/app.js"
   },
   "repository": {
     "type": "git",

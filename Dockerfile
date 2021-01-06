@@ -16,4 +16,4 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY --from=builder /build/dist ./dist
-CMD ["npm", "run", "run"]
+CMD ["npm", "run", "prod"]
