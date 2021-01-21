@@ -53,9 +53,9 @@ jobs:
         run: docker build -t back .
       - name: Tags
         run: |
-          docker tag back ${{ secrets.DOCKER_USER }}/telegrambot-ukranian:${{ github.sha }}
-          docker tag back ${{ secrets.DOCKER_USER }}/telegrambot-ukranian:latest
+          docker tag back ${{ secrets.DOCKER_USER }}/telegrambot_ukranian:${{ github.sha }}
+          docker tag back ${{ secrets.DOCKER_USER }}/telegrambot_ukranian:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/telegrambot-ukranian:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/telegrambot-ukranian:latest
+          docker push ${{ secrets.DOCKER_USER }}/telegrambot_ukranian:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/telegrambot_ukranian:latest
