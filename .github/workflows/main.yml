@@ -54,7 +54,7 @@ jobs:
       - name: Scan image
         uses: anchore/scan-action@v2
         with:
-          image: "localbuild/ukranianbot:latest"
+          image: "ukranianbot:latest"
           fail-build: true
           severity-cutoff: critical
       - name: Tags
