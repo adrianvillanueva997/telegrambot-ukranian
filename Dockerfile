@@ -14,6 +14,6 @@ RUN npm run build
 FROM base as dist
 WORKDIR /app
 COPY package.json .
-RUN npm install
+RUN npm install --production
 COPY --from=builder /build/dist ./dist
 CMD ["npm", "run", "prod"]
