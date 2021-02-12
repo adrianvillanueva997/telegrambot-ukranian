@@ -16,4 +16,6 @@ WORKDIR /app
 COPY package.json .
 RUN npm install --production
 COPY --from=builder /build/dist ./dist
+RUN adduser -D appuser
+USER appuser
 CMD ["npm", "run", "prod"]
