@@ -17,19 +17,6 @@ const sendErrorMessage = async (ctx: Context, err: Error) => {
 	await ctx.telegram.sendMessage(ctx.message!.chat.id, err.toString());
 };
 
-app.command("test", async (ctx) => {
-	const args = commandArgsParser(ctx);
-	if (args != null) {
-		const joinedArgs = joinArgs(args?.arguments);
-		console.log(joinedArgs);
-	}
-	await ctx.telegram
-		.sendMessage(ctx.message!.chat.id, "Patata", {
-			reply_to_message_id: ctx.message!.message_id,
-		})
-		.then();
-});
-
 app.command("weather", async (ctx) => {
 	await ctx.telegram.sendChatAction(ctx.message!.chat.id, "typing");
 	const args = commandArgsParser(ctx);
@@ -142,6 +129,25 @@ app.command("call", async (ctx) => {
 			image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)]);
 		await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
 			caption: "(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @darktrainer",
+		});
+	} catch (err) {
+		await sendErrorMessage(ctx, err);
+	}
+});
+
+app.command("civ", async (ctx) => {
+	try {
+		await ctx.telegram.sendChatAction(ctx.message!.chat.id, "upload_photo");
+		const imageSearch = new ImageSearch();
+		const images = await imageSearch.getImage("civilization V memes").then((r) => {
+			return r as [];
+		});
+		let image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)]);
+		const imageStatus = await imageSearch.checkImageStatus(image);
+		if (imageStatus != 200 || imageStatus == null)
+			image = await imageSearch.getRandomImage(images[getRandomInt(0, images.length - 1)]);
+		await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
+			caption: "(Civ V) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe",
 		});
 	} catch (err) {
 		await sendErrorMessage(ctx, err);
