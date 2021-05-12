@@ -28,7 +28,7 @@ app.command("weather", async (ctx) => {
       if (ow.status === 404) {
         await ctx.telegram.sendMessage(
           ctx.message!.chat.id,
-          `City "${args.arguments[0]}" not found!`
+          `City "${joinedArgs}" not found!`
         );
       } else if (ow.status === 200) {
         await ctx.telegram.sendMessage(
