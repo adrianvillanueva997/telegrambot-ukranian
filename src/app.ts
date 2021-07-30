@@ -228,7 +228,7 @@ app.command("telefonillo", async (ctx) => {
       );
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
       caption:
-        "(GarticPhone/Pinturillo) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @dvdgg, @sanz97xx, @txc450, @thedrdv @thedrdvd",
+        "(GarticPhone/Pinturillo) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @dvdgg, @sanz97xx, @txc450, @thedrdvd",
     });
   } catch (err) {
     await sendErrorMessage(ctx, err);
