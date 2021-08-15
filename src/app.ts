@@ -206,7 +206,8 @@ app.command('pokemongo', async (ctx) => {
         images[getRandomInt(0, images.length - 1)]
       );
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
-      caption: '(Pokemon Go) @lilnarwhal ,@darktrainer, @Sauturn, @Garfu01',
+      caption:
+        '(Pokemon Go) @lilnarwhal ,@darktrainer, @Sauturn, @Garfu01, @CecilioGil',
     });
   } catch (err) {
     await sendErrorMessage(ctx, err);
