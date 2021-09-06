@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const gis = require("g-i-s");
+const gis = require('g-i-s');
 
 interface imageData {
   url: string;
