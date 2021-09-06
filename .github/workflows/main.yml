@@ -73,6 +73,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
           push: true
           tags: |
-            ${{ steps.meta.outputs.tags }}
             ${{ env.REGISTRY }}/adrianvillanueva997/ukranianbot_telegram:latest
           labels: ${{ steps.meta.outputs.labels }}
