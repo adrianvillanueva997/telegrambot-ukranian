@@ -47,7 +47,7 @@ app.command('weather', async (ctx) => {
           { parse_mode: 'HTML' }
         );
       }
-    } catch (err) {
+    } catch (err: any) {
       await sendErrorMessage(ctx, err);
     }
   }
@@ -76,7 +76,7 @@ app.command('get', async (ctx) => {
         caption: image,
         parse_mode: 'HTML',
       });
-    } catch (err) {
+    } catch (err: any) {
       await sendErrorMessage(ctx, err);
     }
   }
@@ -96,7 +96,7 @@ app.command('getboards', async (ctx) => {
     await ctx.telegram.sendMessage(ctx.message!.chat.id, message, {
       parse_mode: 'HTML',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -111,7 +111,7 @@ app.command('getfunnyshit', async (ctx) => {
       `<a href="${webm.fileURL}">${webm.fileTitle}</a>`,
       { parse_mode: 'HTML' }
     );
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -135,7 +135,7 @@ app.command('call', async (ctx) => {
       caption:
         '(Doto) @thexiao77, @lilnarwhal, @dvdgg, @SanZ97xX, @darktrainer',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -161,7 +161,7 @@ app.command('civ', async (ctx) => {
       caption:
         '(Civ V) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @jaimegsov',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -186,7 +186,7 @@ app.command('cs', async (ctx) => {
         '(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe ' +
         ',@darktrainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD, @jaimegsov',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -210,7 +210,7 @@ app.command('pokemongo', async (ctx) => {
       caption:
         '(Pokemon Go) @lilnarwhal ,@darktrainer, @Sauturn, @Garfu01, @CecilioGil',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -221,7 +221,7 @@ app.command('wikired', async (ctx) => {
     const wikired = new Wikired();
     const text = await wikired.wikired();
     await ctx.telegram.sendMessage(ctx.message!.chat.id, text);
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -232,7 +232,7 @@ app.command('ukranian', async (ctx) => {
     const wikired = new Wikired();
     const text = await wikired.ukranian();
     await ctx.telegram.sendMessage(ctx.message!.chat.id, text);
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
@@ -255,9 +255,9 @@ app.command('telefonillo', async (ctx) => {
       caption:
         '(GarticPhone/Pinturillo) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @dvdgg, @sanz97xx, @txc450, @thedrdvd, @CecilioGil, @jaimegsov',
     });
-  } catch (err) {
+  } catch (err: any) {
     await sendErrorMessage(ctx, err);
   }
 });
 
-app.launch().then((r) => console.log('Bot running!'));
+app.launch().then(() => console.log('Bot running!'));

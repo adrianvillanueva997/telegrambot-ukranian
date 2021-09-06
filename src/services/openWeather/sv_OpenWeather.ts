@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface weatherData {
   status: number;
@@ -28,9 +28,9 @@ interface weatherData {
 }
 
 export class OpenWeather {
-  private key: string = "";
+  private key: string = '';
   private weatherUrl: string =
-    "https://api.openweathermap.org/data/2.5/weather";
+    'https://api.openweathermap.org/data/2.5/weather';
 
   constructor() {
     this.getKey();
@@ -72,7 +72,7 @@ export class OpenWeather {
             },
           } as weatherData;
         });
-    } catch (err) {
+    } catch (err: any) {
       return {
         status: err.response.status,
       } as weatherData;
