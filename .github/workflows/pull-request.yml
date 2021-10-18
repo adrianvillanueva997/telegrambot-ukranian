@@ -17,7 +17,7 @@ jobs:
     container:
       image: node
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - name: Install & Tests
         run: |
           npm install
@@ -26,6 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: ci
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - name: Build
         run: docker build -t test .
