@@ -20,12 +20,12 @@ jobs:
     container:
       image: node
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
       - name: Install & Tests
         run: |
           npm install
       - name: Checkout repository
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
         with:
           # We must fetch at least the immediate parents so that if this is
           # a pull request then we can checkout the head.
@@ -49,7 +49,7 @@ jobs:
     needs: ci
     steps:
       - name: Set up CD
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
       - name: Set up Docker Qemu
         uses: docker/setup-qemu-action@v1.2.0
       - name: Setup Docker Buildx
