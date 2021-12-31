@@ -159,7 +159,7 @@ app.command('civ', async (ctx) => {
       );
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
       caption:
-        '(Civ V) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @jaimegsov',
+        '(Civ V) @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @jaimegsov',
     });
   } catch (err: any) {
     await sendErrorMessage(ctx, err);
@@ -184,7 +184,7 @@ app.command('cs', async (ctx) => {
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
       caption:
         '(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe ' +
-        ',@darktrainer, @Sauturn, @REDMSR, @txc450, @THEDRDVD, @jaimegsov',
+        ',@darktrainer, @Sauturn, @REDMSR, @THEDRDVD, @jaimegsov',
     });
   } catch (err: any) {
     await sendErrorMessage(ctx, err);
@@ -253,7 +253,7 @@ app.command('telefonillo', async (ctx) => {
       );
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
       caption:
-        '(GarticPhone/Pinturillo) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @dvdgg, @sanz97xx, @txc450, @thedrdvd, @CecilioGil, @jaimegsov',
+        '(GarticPhone/Pinturillo) @thexiao77, @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @dvdgg, @sanz97xx, @thedrdvd, @CecilioGil, @jaimegsov',
     });
   } catch (err: any) {
     await sendErrorMessage(ctx, err);
