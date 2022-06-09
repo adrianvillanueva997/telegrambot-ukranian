@@ -1,7 +1,7 @@
 # Multistage docker image building
 # build-env -> dist
 
-FROM node:18.3.0-alpine as base
+FROM node:18.3.0-bullseye-slim as base
 # Building container
 FROM base as builder
 WORKDIR /build
@@ -16,6 +16,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm install --production
 COPY --from=builder /build/dist ./dist
-RUN adduser -D appuser
+
+RUN adduser --disabled-password appuser
 USER appuser
 CMD ["npm", "run", "prod"]

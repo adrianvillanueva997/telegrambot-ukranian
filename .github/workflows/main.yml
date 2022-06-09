@@ -76,11 +76,11 @@ jobs:
             ${{ env.REGISTRY }}/adrianvillanueva997/ukranianbot_telegram:latest
           labels: ${{ steps.meta.outputs.labels }}
   delete_images:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     needs: push_to_ghcr
     steps:
-    - name: Delete unused docker images
-      uses: actions/delete-package-versions@v3
-      with:
-        package-name: 'ukranianbot_telegram'
-        min-versions-to-keep: 5
+      - name: Delete unused docker images
+        uses: actions/delete-package-versions@v3
+        with:
+          package-name: 'ukranianbot_telegram'
+          min-versions-to-keep: 5
