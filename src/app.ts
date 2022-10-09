@@ -2,14 +2,14 @@ import { Context, Telegraf } from 'telegraf';
 
 require('dotenv').config();
 
-import { commandArgsParser } from './middleware/md_commandsArgument';
-import { OpenWeather } from './services/openWeather/sv_OpenWeather';
 import { argsChecker } from './middleware/md_argsChecker';
-import { ImageSearch } from './services/imageSearch/sv_imageSearch';
-import { getRandomInt } from './utilities/randomizer';
 import { joinArgs } from './middleware/md_argsJoiner';
+import { commandArgsParser } from './middleware/md_commandsArgument';
 import { Chan } from './services/4chan/sv_4chan';
+import { ImageSearch } from './services/imageSearch/sv_imageSearch';
+import { OpenWeather } from './services/openWeather/sv_OpenWeather';
 import { Wikired } from './services/wikired/sv_wikired';
+import { getRandomInt } from './utilities/randomizer';
 
 const app = new Telegraf(process.env.TelegramBot_Ukranian_Key!);
 
@@ -153,13 +153,13 @@ app.command('civ', async (ctx) => {
       images[getRandomInt(0, images.length - 1)]
     );
     const imageStatus = await imageSearch.checkImageStatus(image);
-    if (imageStatus != 200 || imageStatus == null)
+    if (imageStatus != 200 || imageStatus == null) {
       image = await imageSearch.getRandomImage(
         images[getRandomInt(0, images.length - 1)]
       );
+    }
     await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
-      caption:
-        '(Civ V) @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @jaimegsov',
+      caption: '(Civ V) @lilnarwhal, @joseawe, @sauturn, @DavasJoe, @jaimegsov',
     });
   } catch (err: any) {
     await sendErrorMessage(ctx, err);
@@ -185,6 +185,33 @@ app.command('cs', async (ctx) => {
       caption:
         '(CSGO) @thexiao77, @lilnarwhal, @joseawe, @DavasJoe ' +
         ',@darktrainer, @Sauturn, @REDMSR, @THEDRDVD, @jaimegsov',
+    });
+  } catch (err: any) {
+    await sendErrorMessage(ctx, err);
+  }
+});
+
+app.command('ow', async (ctx) => {
+  try {
+    await ctx.telegram.sendChatAction(ctx.message!.chat.id, 'upload_photo');
+    const imageSearch = new ImageSearch();
+    const images = await imageSearch
+      .getImage('team fortress 2 memes')
+      .then((r) => {
+        return r as [];
+      });
+    let image = await imageSearch.getRandomImage(
+      images[getRandomInt(0, images.length - 1)]
+    );
+    const imageStatus = await imageSearch.checkImageStatus(image);
+    if (imageStatus != 200 || imageStatus == null)
+      image = await imageSearch.getRandomImage(
+        images[getRandomInt(0, images.length - 1)]
+      );
+    await ctx.telegram.sendPhoto(ctx.message!.chat.id, image, {
+      caption:
+        '(overwatch) @thexiao77, @lilnarwhal, @joseawe ' +
+        ',@darktrainer, @REDMSR, @sanz97xx',
     });
   } catch (err: any) {
     await sendErrorMessage(ctx, err);
