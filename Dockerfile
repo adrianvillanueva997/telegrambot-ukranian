@@ -1,7 +1,7 @@
 # Multistage docker image building
 # build-env -> dist
 
-FROM node:18.10.0-bullseye-slim as base
+FROM node:18.11.0-bullseye-slim as base
 # Building container
 FROM base as builder
 WORKDIR /build
