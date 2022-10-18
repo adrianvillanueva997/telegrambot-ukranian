@@ -15,7 +15,7 @@ jobs:
       matrix:
         # Override automatic language detection by changing the below list
         # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
-        language: ['javascript']
+        language: ["javascript"]
         # Learn more...
     container:
       image: node
@@ -70,7 +70,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ${{ env.REGISTRY }}/adrianvillanueva997/ukranianbot_telegram:latest
@@ -82,5 +82,5 @@ jobs:
       - name: Delete unused docker images
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'ukranianbot_telegram'
+          package-name: "ukranianbot_telegram"
           min-versions-to-keep: 5
