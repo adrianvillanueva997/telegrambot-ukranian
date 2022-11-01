@@ -13,8 +13,8 @@ RUN apt-get update  && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* /var/tmp/*
 WORKDIR /app
-COPY --from=build /build/target/release/deficientebot_telegram .
+COPY --from=build /build/target/release/telegrambot_ukranian .
 RUN adduser --disabled-password appuser
 USER appuser
 ENV RUST_LOG=info
-ENTRYPOINT [ "./deficientebot_telegram" ]
+ENTRYPOINT [ "./telegrambot_ukranian" ]
