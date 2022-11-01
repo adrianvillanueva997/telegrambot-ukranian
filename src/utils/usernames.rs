@@ -1,0 +1,14 @@
+pub const THEXIAO77: &str = "@thexiao77";
+pub const JAVI: &str = "@LilNarwhal";
+pub const VICTOR: &str = "@SanZ97xX";
+pub const DARKTRAINER: &str = "@DarkTrainer";
+pub const AWE: &str = "@JoseAwe";
+pub const TOXIC: &str = "@txc450";
+pub const RED: &str = "@REDMSR";
+pub const DVDGG: &str = "@Dvdgg";
+pub const GARFU: &str = "@Garfu01";
+pub const SAUTURN: &str = "@Sauturn";
+pub const MARIO: &str = "@CecilioGil";
+pub const JAIME: &str = "@jaimegsov";
+pub const DAVAS: &str = "@DavasJoe";
+pub const DRDVD: &str = "@THEDRDVD";
