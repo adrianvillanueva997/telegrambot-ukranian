@@ -3,6 +3,11 @@
 
 FROM rust:1.64-slim-bullseye as build
 WORKDIR /build
+RUN apt-get update && \
+    apt-get install -y pkg-config --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
 COPY . .
 RUN cargo build --release
 
