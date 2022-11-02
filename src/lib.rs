@@ -26,6 +26,8 @@ pub enum Command {
     Pokemongo,
     #[command(description = "Let's play some csgo!")]
     Telefonillo,
+    #[command(description = "Let's play some csgo!")]
+    Weather { location: String },
 }
 
 pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
@@ -94,7 +96,13 @@ pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> 
             )
             .await?
         }
+        Command::Weather { location } => bot.send_message(msg.chat.id, &location).await?,
     };
 
     Ok(())
+}
+
+pub async fn send_message(bot: Bot, message: Message, text: String) {
+    let result = bot.send_message(message.chat.id, text).await;
+    let a = result.unwrap();
 }
