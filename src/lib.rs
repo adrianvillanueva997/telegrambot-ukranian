@@ -5,6 +5,7 @@ use utils::usernames::{
 };
 
 pub mod utils;
+pub mod weather;
 
 #[derive(BotCommands, Clone)]
 #[command(
@@ -22,11 +23,11 @@ pub enum Command {
     Cs,
     #[command(description = "Let's play some csgo!")]
     Ow,
-    #[command(description = "Let's play some csgo!")]
+    #[command(description = "Let's play some overwatch!")]
     Pokemongo,
-    #[command(description = "Let's play some csgo!")]
+    #[command(description = "Let's play some pokemongoles!")]
     Telefonillo,
-    #[command(description = "Let's play some csgo!")]
+    #[command(description = "Let's play some garticphone!")]
     Weather { location: String },
 }
 
@@ -96,13 +97,17 @@ pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> 
             )
             .await?
         }
-        Command::Weather { location } => bot.send_message(msg.chat.id, &location).await?,
+        Command::Weather { location } => {
+            if location.is_empty() {
+                bot.send_message(
+                    msg.chat.id,
+                    "Tienes que poner la localizacion a consultar, por ejemplo:\n /weather Manila",
+                )
+                .await?
+            } else {
+                bot.send_message(msg.chat.id, &location).await?
+            }
+        }
     };
-
     Ok(())
-}
-
-pub async fn send_message(bot: Bot, message: Message, text: String) {
-    let result = bot.send_message(message.chat.id, text).await;
-    let a = result.unwrap();
 }

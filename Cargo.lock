@@ -1050,6 +1050,8 @@ version = "0.1.0"
 dependencies = [
  "log",
  "pretty_env_logger",
+ "reqwest",
+ "serde",
  "teloxide",
  "tokio",
 ]
