@@ -1,11 +1,12 @@
+pub mod utils;
+pub mod weather;
+
 use teloxide::{prelude::*, utils::command::BotCommands};
 use utils::usernames::{
     AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, RED, SAUTURN, THEXIAO77,
     VICTOR,
 };
-
-pub mod utils;
-pub mod weather;
+use weather::openweather::get_weather;
 
 #[derive(BotCommands, Clone)]
 #[command(
@@ -105,7 +106,9 @@ pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> 
                 )
                 .await?
             } else {
-                bot.send_message(msg.chat.id, &location).await?
+                let result = get_weather(&location).await;
+                let a = result.unwrap_or_else(|error| panic!("There was an error: {:?}", error));
+                bot.send_message(msg.chat.id, a.id.to_string()).await?
             }
         }
     };
