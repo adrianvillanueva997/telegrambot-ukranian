@@ -1,22 +1,25 @@
 # Multistage docker image building
-# build-env -> dist
+# build -> prod
 
-FROM node:19.0.0-bullseye-slim as base
-# Building container
-FROM base as builder
+FROM rust:1.64-slim-bullseye as build
 WORKDIR /build
-COPY package.json .
-RUN npm install
+RUN apt-get update && \
+    apt-get install -y pkg-config libssl-dev --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
 COPY . .
-RUN npm run build
+RUN cargo build --release
 
-# Production container
-FROM base as dist
+FROM debian:11.5-slim as prod
+RUN apt-get update  && \
+    apt-get install -y ca-certificates httpie --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
 WORKDIR /app
-COPY package.json .
-RUN npm install --production
-COPY --from=builder /build/dist ./dist
-
+COPY --from=build /build/target/release/telegrambot_ukranian .
 RUN adduser --disabled-password appuser
 USER appuser
-CMD ["npm", "run", "prod"]
+ENV RUST_LOG=info
+ENTRYPOINT [ "./telegrambot_ukranian" ]

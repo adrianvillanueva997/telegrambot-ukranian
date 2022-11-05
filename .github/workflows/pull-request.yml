@@ -1,31 +1,60 @@
-name: Build Docker image
+name: Cargo Build & Test
 
 on:
   pull_request:
-    branches: [ master ]
-    types: [ opened, synchronize, closed ]
-jobs:
-  ci:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # Override automatic language detection by changing the below list
-        # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
-        language: [ 'javascript' ]
-        # Learn more...
-    container:
-      image: node
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install & Tests
-        run: |
-          npm install
 
-  cd:
-    runs-on: ubuntu-latest
-    needs: ci
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  run_clippy:
+    name: Run clippy
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+      - run: cargo clippy
+  docker_lint:
+    runs-on: ubuntu-latest
+    container: hadolint/hadolint:latest-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          apk add --no-cache make
+          make docker-lint
+  build_and_test:
+    name: Run tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        toolchain:
+          - stable
+          - beta
+          - nightly
+    steps:
+      - uses: actions/checkout@v3
+      - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+      - run: cargo build
+      - run: cargo test --verbose
+  build_docker_image:
+    name: Build docker image
+    runs-on: ubuntu-22.04
+    needs: [build_and_test, run_clippy, docker_lint]
+    strategy:
+      matrix:
+        architectures:
+          - linux/amd64
+    steps:
+      - name: Set up CD
+        uses: actions/checkout@v3
+      - name: Set up Docker Qemu
+        uses: docker/setup-qemu-action@v2.1.0
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v2.2.1
       - name: Build
-        run: docker build -t test .
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: ${{ matrix.architectures }}
+          push: false
