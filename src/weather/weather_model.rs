@@ -9,7 +9,6 @@ pub struct OpenWeather {
     pub main: Main,
     pub visibility: i64,
     pub wind: Wind,
-    pub rain: Rain,
     pub clouds: Clouds,
     pub dt: i64,
     pub sys: Sys,
@@ -26,7 +25,7 @@ pub struct Coord {
     pub lat: f64,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Weather {
     pub id: i64,
@@ -47,24 +46,12 @@ pub struct Main {
     pub temp_max: f64,
     pub pressure: i64,
     pub humidity: i64,
-    #[serde(rename = "sea_level")]
-    pub sea_level: i64,
-    #[serde(rename = "grnd_level")]
-    pub grnd_level: i64,
 }
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Wind {
     pub speed: f64,
     pub deg: i64,
-    pub gust: f64,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Rain {
-    #[serde(rename = "1h")]
-    pub n1h: f64,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

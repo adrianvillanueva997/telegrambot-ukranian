@@ -1,7 +1,7 @@
 pub mod utils;
 pub mod weather;
 
-use teloxide::{prelude::*, utils::command::BotCommands};
+use teloxide::{prelude::*, types::ParseMode, utils::command::BotCommands};
 use utils::usernames::{
     AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, RED, SAUTURN, THEXIAO77,
     VICTOR,
@@ -32,7 +32,7 @@ pub enum Command {
     Weather { location: String },
 }
 
-pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
+pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
     match cmd {
         Command::Help => {
             bot.send_message(msg.chat.id, Command::descriptions().to_string())
@@ -106,9 +106,45 @@ pub async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> 
                 )
                 .await?
             } else {
-                let result = get_weather(&location).await;
-                let a = result.unwrap_or_else(|error| panic!("There was an error: {:?}", error));
-                bot.send_message(msg.chat.id, a.id.to_string()).await?
+                // let a = result.unwrap_or_else(|error| panic!("There was an error: {:?}", error));
+                let weather = get_weather(&location).await;
+                if !weather.name.is_empty() {
+                    let message = format!(
+                        r"<b>Location</b>: {},{} ({},{})
+<b>Current Temperature:</b> {}ºC
+<b>Current weather:</b> {},{}
+<b>Max Temperature:</b> {}ºC
+<b>Min Temperature:</b> {}ºC
+<b>Temperature feels like:</b> {}ºC
+<b>Wind:</b> {}m/s, {}º
+<b>Pressure:</b> {}hPa
+<b>Humidty:</b> {}%
+<b>Visibility:</b> {}m",
+                        weather.name,
+                        weather.sys.country,
+                        weather.coord.lon,
+                        weather.coord.lat,
+                        weather.main.temp,
+                        weather.weather[0].main,
+                        weather.weather[0].description,
+                        weather.main.temp_max,
+                        weather.main.temp_min,
+                        weather.main.feels_like,
+                        weather.wind.speed,
+                        weather.wind.deg,
+                        weather.main.pressure,
+                        weather.main.humidity,
+                        weather.visibility
+                    );
+                    bot.send_message(msg.chat.id, message)
+                        .parse_mode(ParseMode::Html)
+                        .reply_to_message_id(msg.id)
+                        .await?
+                } else {
+                    bot.send_message(msg.chat.id, "Ni puta idea de donde esta eso")
+                        .reply_to_message_id(msg.id)
+                        .await?
+                }
             }
         }
     };
