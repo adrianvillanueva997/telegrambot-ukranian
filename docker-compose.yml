@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   wikired_api:
     restart: unless-stopped
@@ -10,21 +10,6 @@ services:
       - 80
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    volumes:
-      - ./ukranian.json:/app/ukranian.json
-      - ./wikired.json:/app/wikired.json
-  bot:
-    restart: unless-stopped
-    image: telegram_bot_dev
-    container_name: telegram_ukranian_PROD
-    networks:
-      - bots
-    env_file:
-      - .env
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    depends_on:
-      - wikired_api
 networks:
   bots:
     external: true
