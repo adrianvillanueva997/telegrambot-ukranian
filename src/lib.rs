@@ -102,11 +102,10 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             if location.is_empty() {
                 bot.send_message(
                     msg.chat.id,
-                    "Tienes que poner la localizacion a consultar, por ejemplo:\n /weather Manila",
+                    "Tienes que poner la localizacion a consultar, por ejemplo:\n /weather Toledo",
                 )
                 .await?
             } else {
-                // let a = result.unwrap_or_else(|error| panic!("There was an error: {:?}", error));
                 let weather = get_weather(&location).await;
                 if !weather.name.is_empty() {
                     let message = format!(
