@@ -1,7 +1,7 @@
 # Multistage docker image building
 # build -> prod
 
-FROM rust:1.68.1-slim-bullseye as build
+FROM rust:1.68.2-slim-bullseye as build
 WORKDIR /build
 RUN apt-get update && \
   apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
