@@ -1,4 +1,4 @@
-docker-lint:
-	hadolint --ignore DL3008 Dockerfile
+hadolint:
+	hadolint --config hadolint.yml Dockerfile
 
 lint:  docker-lint
