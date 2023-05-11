@@ -1,4 +1,4 @@
 hadolint:
-	hadolint --config hadolint.yml Dockerfile
+	hadolint --config .hadolint.yml Dockerfile
 
 lint:  docker-lint
