@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           apk add --no-cache make
-          make docker-lint
+          make hadolint
   build_and_test:
     name: Run tests
     runs-on: ubuntu-22.04
