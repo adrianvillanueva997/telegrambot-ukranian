@@ -19,7 +19,7 @@ COPY . .
 RUN cargo build --release --bin telegrambot_ukranian
 
 # Runtime stage
-FROM alpine:3.17.3 AS runtime
+FROM alpine:3.18.0 AS runtime
 WORKDIR /app
 RUN apk --no-cache --no-progress --update add ca-certificates
 COPY --from=builder --chown=nobody:nogroup /app/target/release/telegrambot_ukranian /usr/local/bin/app
