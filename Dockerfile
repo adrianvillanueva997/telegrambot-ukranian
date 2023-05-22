@@ -10,6 +10,7 @@ COPY . .
 RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef AS builder
+WORKDIR /build
 RUN apt-get update && apt-get install pkg-config libssl-dev -y
 COPY --from=planner /app/recipe.json recipe.json
 # Build dependencies - this is the caching Docker layer!
@@ -22,7 +23,7 @@ RUN cargo build --release --bin telegrambot_ukranian
 FROM alpine:3.18.0 AS runtime
 WORKDIR /app
 RUN apk --no-cache --no-progress --update add ca-certificates
-COPY --from=builder --chown=nobody:nogroup /app/target/release/telegrambot_ukranian /usr/local/bin/app
+COPY --from=builder --chown=nobody:nogroup /build/target/release/telegrambot_ukranian /usr/local/bin/app
 EXPOSE 8080
 USER nobody:nogroup
 ENV RUST_LOG=info
