@@ -1,30 +1,25 @@
 # Multistage docker image building
 # build -> prod
 
-# Build stage
-FROM lukemathwalker/cargo-chef:0.1.59-rust-slim-buster AS chef
-WORKDIR /app
-
-FROM chef AS planner
-COPY . .
-RUN cargo chef prepare --recipe-path recipe.json
-
-FROM chef AS builder
+FROM rust:1.69.0-slim-bullseye as build
 WORKDIR /build
-RUN apt-get update && apt-get install pkg-config libssl-dev -y
-COPY --from=planner /app/recipe.json recipe.json
-# Build dependencies - this is the caching Docker layer!
-RUN cargo chef cook --release --recipe-path recipe.json
-# Build application
+RUN apt-get update && \
+    apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
 COPY . .
-RUN cargo build --release --bin telegrambot_ukranian
+RUN cargo build --release
 
-# Runtime stage
-FROM alpine:3.18.0 AS runtime
+FROM debian:11.7-slim as prod
+RUN apt-get update  && \
+    apt-get install -y ca-certificates httpie --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
 WORKDIR /app
-RUN apk --no-cache --no-progress --update add ca-certificates
-COPY --from=builder --chown=nobody:nogroup /build/target/release/telegrambot_ukranian /usr/local/bin/app
-EXPOSE 8080
-USER nobody:nogroup
+COPY --from=build /build/target/release/telegrambot_ukranian .
+RUN adduser --disabled-password appuser
+USER appuser
 ENV RUST_LOG=info
-ENTRYPOINT ["/usr/local/bin/app"]
+ENTRYPOINT [ "./telegrambot_ukranian" ]
