@@ -11,7 +11,7 @@ RUN apt-get update && \
 COPY . .
 RUN cargo build --release
 
-FROM debian:11.7-slim as prod
+FROM debian:12.0-slim as prod
 RUN apt-get update  && \
     apt-get install -y ca-certificates httpie --no-install-recommends && \
     apt-get clean && \
