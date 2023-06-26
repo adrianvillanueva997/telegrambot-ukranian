@@ -4,7 +4,7 @@ services:
     image: ghcr.io/adrianvillanueva997/ukranianbot_telegram:latest
     networks:
       - proxy
-    container_name: webhook-test
+    container_name: telegrambot_ukranian
     restart: unless-stopped
     labels:
       - com.ouroboros.enable=true
