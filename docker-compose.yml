@@ -1,15 +1,26 @@
-version: "3"
+version: "3.0"
 services:
-  wikired_api:
-    restart: unless-stopped
-    image: wikired_api_dev
-    container_name: wikired_api
+  web:
+    image: ghcr.io/adrianvillanueva997/ukranianbot_telegram:latest
     networks:
-      - bots
-    ports:
-      - 80
+      - proxy
+    container_name: webhook-test
+    restart: unless-stopped
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - com.ouroboros.enable=true
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.permanent=true"
+      - "traefik.http.routers.webhook-ukranian-web.middlewares=webhook-redirect-websecure"
+      - traefik.http.routers.webhook-ukranian-web.rule=Host(`ukranian.thexiao77.com`)
+      - traefik.http.routers.webhook-ukranian-web.entrypoints=http
+      - traefik.http.routers.webhook-ukranian-websecure.rule=Host(`ukranian.thexiao77.com`)
+      - traefik.http.routers.webhook-ukranian-websecure.tls.certresolver=le
+      - traefik.http.routers.webhook-ukranian-websecure.tls=true
+      - traefik.http.routers.webhook-ukranian-websecure.entrypoints=https
+      - "traefik.docker.network=proxy"
+    env_file:
+      - .env
 networks:
-  bots:
+  proxy:
     external: true
