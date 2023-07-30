@@ -17,14 +17,14 @@ pub enum Command {
     #[command(description = "display this text.")]
     Help,
     #[command(description = "Let's play some dota!")]
-    Call,
+    Dota,
     #[command(description = "Let's play some civilization!")]
     Civ,
     #[command(description = "Let's play some csgo!")]
     Cs,
     #[command(description = "Let's play some csgo!")]
-    Ow,
-    #[command(description = "Let's play some overwatch!")]
+    Hunt,
+    #[command(description = "Let's play some hunt!")]
     Pokemongo,
     #[command(description = "Let's play some pokemongoles!")]
     Telefonillo,
@@ -38,7 +38,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(msg.chat.id, Command::descriptions().to_string())
                 .await?
         }
-        Command::Call => {
+        Command::Dota => {
             bot.send_message(
                 msg.chat.id,
                 format!(
@@ -68,13 +68,10 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             )
             .await?
         }
-        Command::Ow => {
+        Command::Hunt => {
             bot.send_message(
                 msg.chat.id,
-                format!(
-                    "(Overwatch) {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, DARKTRAINER, AWE, JAVI, RED, VICTOR
-                ),
+                format!("(Hunt) {}, {}, {}, {}", DARKTRAINER, SAUTURN, DAVAS, MARIO),
             )
             .await?
         }
