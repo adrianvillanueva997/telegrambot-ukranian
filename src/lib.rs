@@ -1,12 +1,7 @@
 pub mod utils;
 pub mod weather;
 
-use teloxide::{
-    payloads::AnswerWebAppQuerySetters,
-    prelude::*,
-    types::{ParseMode, VideoChatEnded},
-    utils::command::BotCommands,
-};
+use teloxide::{prelude::*, types::ParseMode, utils::command::BotCommands};
 use utils::usernames::{
     AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, MCKAY, RED, SAUTURN,
     THEXIAO77, TOXIC, VICTOR,
