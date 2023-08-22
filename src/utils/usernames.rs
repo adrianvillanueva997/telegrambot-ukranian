@@ -12,3 +12,4 @@ pub const MARIO: &str = "@CecilioGil";
 pub const JAIME: &str = "@jaimegsov";
 pub const DAVAS: &str = "@DavasJoe";
 pub const DRDVD: &str = "@THEDRDVD";
+pub const MCKAY: &str = "DoctorMckay";

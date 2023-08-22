@@ -1,10 +1,15 @@
 pub mod utils;
 pub mod weather;
 
-use teloxide::{prelude::*, types::ParseMode, utils::command::BotCommands};
+use teloxide::{
+    payloads::AnswerWebAppQuerySetters,
+    prelude::*,
+    types::{ParseMode, VideoChatEnded},
+    utils::command::BotCommands,
+};
 use utils::usernames::{
-    AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, RED, SAUTURN, THEXIAO77,
-    VICTOR,
+    AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, MCKAY, RED, SAUTURN,
+    THEXIAO77, TOXIC, VICTOR,
 };
 use weather::openweather::get_weather;
 
@@ -30,6 +35,8 @@ pub enum Command {
     Telefonillo,
     #[command(description = "Let's play some garticphone!")]
     Weather { location: String },
+    #[command(description = "everyone")]
+    Everyone,
 }
 
 pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
@@ -90,7 +97,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, JAVI, AWE, SAUTURN, DAVAS, DVDGG, VICTOR, DRDVD, JAIME, DARKTRAINER
+                    THEXIAO77, JAVI, AWE, SAUTURN, DAVAS, DVDGG, VICTOR, DRDVD, JAIME, DARKTRAINER,
                 ),
             )
             .await?
@@ -142,6 +149,30 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                         .await?
                 }
             }
+        }
+        Command::Everyone => {
+            bot.send_message(
+                msg.chat.id,
+                format!(
+                    "@everyone: {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}",
+                    THEXIAO77,
+                    JAVI,
+                    VICTOR,
+                    DARKTRAINER,
+                    AWE,
+                    TOXIC,
+                    RED,
+                    DVDGG,
+                    GARFU,
+                    SAUTURN,
+                    MARIO,
+                    JAIME,
+                    DAVAS,
+                    DRDVD,
+                    MCKAY,
+                ),
+            )
+            .await?
         }
     };
     Ok(())
