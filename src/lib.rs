@@ -44,8 +44,8 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Dota 2) {}, {}, {}, {}, {}",
-                    THEXIAO77, JAVI, DARKTRAINER, DVDGG, VICTOR
+                    "(Dota 2) {}, {}, {}, {}, {}, {}",
+                    THEXIAO77, JAVI, DARKTRAINER, DVDGG, VICTOR, MARIO
                 ),
             )
             .await?
