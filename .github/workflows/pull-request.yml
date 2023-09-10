@@ -11,14 +11,14 @@ jobs:
     name: Run clippy
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
       - run: cargo clippy
   docker_lint:
     runs-on: ubuntu-latest
     container: hadolint/hadolint:latest-alpine
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           apk add --no-cache make
           make hadolint
@@ -32,7 +32,7 @@ jobs:
           - stable
           - beta
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
       - run: cargo build
       - run: cargo test --verbose
@@ -46,7 +46,7 @@ jobs:
           - linux/amd64
     steps:
       - name: Set up CD
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Docker Qemu
         uses: docker/setup-qemu-action@v2.2.0
       - name: Setup Docker Buildx
