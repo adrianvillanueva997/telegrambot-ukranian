@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "telegrambot-ukranian"
+version = "0.1.0"
+description = ""
+authors = ["adrianvillanueva997 <adrianvillanueva997@gmail.com>"]
+readme = "README.md"
+packages = [{include = "telegrambot_ukranian", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pre-commit = "^3.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

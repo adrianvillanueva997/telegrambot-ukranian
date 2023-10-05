@@ -1,0 +1,47 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+        name: ⚙ Check YAML
+      - id: check-toml
+        name: ⚙ Check TOML
+      - id: end-of-file-fixer
+        name: ⚙ End of file fixer
+      - id: trailing-whitespace
+        name: ⚙ Trailing whitespace remover
+      - id: check-case-conflict
+        name: ⚙ Check case conflict
+      - id: check-docstring-first
+        name: ⚙ Check docstring first
+      - id: check-merge-conflict
+        name: ⚙ Check merge conflict
+      - id: detect-private-key
+        name: ⚙ Detect private key
+      - id: debug-statements
+        name: "⚙️ Check debug statements"
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.3
+    hooks:
+      - id: prettier
+        name: 🖌 Format code with Prettier
+        files: \.(json|markdown|md|yaml|yml)$
+        args: [--write]
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.1-beta
+    hooks:
+      - id: hadolint
+        name: 🐳 Lint Dockerfiles
+
+  - repo: https://github.com/doublify/pre-commit-rust
+    rev: v1.0
+    hooks:
+      - id: fmt
+        name: 🦀 Format Rust code
+      - id: cargo-check
+        name: 🦀 Check Rust code
+      - id: clippy
+        name: 🦀 Lint Rust code
+        args: [--all-targets, --all-features, --, -D warnings]
