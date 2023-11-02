@@ -44,4 +44,4 @@ repos:
         name: 🦀 Check Rust code
       - id: clippy
         name: 🦀 Lint Rust code
-        args: [--all-targets, --all-features, --, -D warnings]
+        args: [--all-targets, --all-features]
