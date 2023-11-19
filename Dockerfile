@@ -1,4 +1,4 @@
-FROM rust:1.73.0-slim-bullseye AS build
+FROM rust:1.74.0-slim-bullseye AS build
 WORKDIR /build
 RUN apt-get update && \
     apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
