@@ -31,6 +31,8 @@ pub enum Command {
     #[command(description = "Let's play some garticphone!")]
     Weather { location: String },
     #[command(description = "everyone")]
+    Lethal,
+    #[command(description = "lethal")]
     Everyone,
 }
 
@@ -93,6 +95,16 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 format!(
                     "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
                     THEXIAO77, JAVI, AWE, SAUTURN, DAVAS, DVDGG, VICTOR, DRDVD, JAIME, DARKTRAINER,
+                ),
+            )
+            .await?
+        }
+        Command::Lethal => {
+            bot.send_message(
+                msg.chat.id,
+                format!(
+                    "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    THEXIAO77, JAVI, AWE, VICTOR, DVDGG, DRDVD, MARIO, DARKTRAINER, RED, TOXIC
                 ),
             )
             .await?
