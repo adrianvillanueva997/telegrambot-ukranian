@@ -103,7 +103,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    "(Lethal) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
                     THEXIAO77, JAVI, AWE, VICTOR, DVDGG, DRDVD, MARIO, DARKTRAINER, RED, TOXIC
                 ),
             )
