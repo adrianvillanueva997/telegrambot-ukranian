@@ -21,5 +21,5 @@ COPY --from=build /build/target/release/telegrambot_ukranian .
 RUN adduser --disabled-password appuser
 USER appuser
 ENV RUST_LOG=info
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT [ "./telegrambot_ukranian" ]
