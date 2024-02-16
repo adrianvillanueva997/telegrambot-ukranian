@@ -8,7 +8,7 @@ RUN apt-get update && \
 COPY . .
 RUN cargo build --release
 
-FROM ubuntu:noble-20240114 AS prod
+FROM ubuntu:noble-20240212 AS prod
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main" | tee /etc/apt/sources.list.d/focal-security.list
 RUN apt-get update && \
