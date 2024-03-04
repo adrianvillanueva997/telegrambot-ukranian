@@ -50,7 +50,7 @@ jobs:
       - name: Set up Docker Qemu
         uses: docker/setup-qemu-action@v3.0.0
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.1.0
       - name: Build
         uses: docker/build-push-action@v5.1.0
         with:
