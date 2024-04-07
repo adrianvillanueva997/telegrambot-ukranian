@@ -1,7 +1,7 @@
 ---
 name: telegrambot_ukranian
 services:
-  web:
+  telegrambot_ukranian:
     image: ghcr.io/adrianvillanueva997/ukranianbot_telegram:v5.5.0
     networks:
       - proxy
