@@ -9,15 +9,15 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.scheme=https
-      - traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.permanent=true
-      - traefik.http.routers.webhook-ukranian-web.middlewares=webhook-redirect-websecure
-      - traefik.http.routers.webhook-ukranian-web.rule=Host(`ukranian.thexiao77.com`)
-      - traefik.http.routers.webhook-ukranian-web.entrypoints=http
-      - traefik.http.routers.webhook-ukranian-websecure.rule=Host(`ukranian.thexiao77.com`)
-      - traefik.http.routers.webhook-ukranian-websecure.tls.certresolver=le
-      - traefik.http.routers.webhook-ukranian-websecure.tls=true
-      - traefik.http.routers.webhook-ukranian-websecure.entrypoints=https
+      - traefik.http.middlewares.ukranian-redirect-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.ukranian-redirect-https.redirectscheme.permanent=true
+      - traefik.http.routers.ukranian-http.middlewares=ukranian-redirect-https
+      - traefik.http.routers.ukranian-http.rule=Host(`ukranian.thexiao77.com`)
+      - traefik.http.routers.ukranian-http.entrypoints=http
+      - traefik.http.routers.ukranian-https.rule=Host(`ukranian.thexiao77.com`)
+      - traefik.http.routers.ukranian-https.tls.certresolver=le
+      - traefik.http.routers.ukranian-https.tls=true
+      - traefik.http.routers.ukranian-https.entrypoints=https
       - traefik.docker.network=proxy
     env_file:
       - stack.env
