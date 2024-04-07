@@ -1,7 +1,7 @@
-version: "3.0"
+name: telegrambot_ukranian
 services:
   web:
-    image: ghcr.io/adrianvillanueva997/ukranianbot_telegram:latest
+    image: ghcr.io/adrianvillanueva997/ukranianbot_telegram:v5.5.0
     networks:
       - proxy
     container_name: telegrambot_ukranian
@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.webhook-ukranian-websecure.entrypoints=https
       - "traefik.docker.network=proxy"
     env_file:
-      - .env
+      - stack.env
 networks:
   proxy:
     external: true
