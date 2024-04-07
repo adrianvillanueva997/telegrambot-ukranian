@@ -1,3 +1,4 @@
+---
 name: telegrambot_ukranian
 services:
   web:
@@ -7,18 +8,17 @@ services:
     container_name: telegrambot_ukranian
     restart: unless-stopped
     labels:
-      - com.ouroboros.enable=true
-      - "traefik.enable=true"
-      - "traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.permanent=true"
-      - "traefik.http.routers.webhook-ukranian-web.middlewares=webhook-redirect-websecure"
+      - traefik.enable=true
+      - traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.scheme=https
+      - traefik.http.middlewares.webhook-ukranian-redirect-websecure.redirectscheme.permanent=true
+      - traefik.http.routers.webhook-ukranian-web.middlewares=webhook-redirect-websecure
       - traefik.http.routers.webhook-ukranian-web.rule=Host(`ukranian.thexiao77.com`)
       - traefik.http.routers.webhook-ukranian-web.entrypoints=http
       - traefik.http.routers.webhook-ukranian-websecure.rule=Host(`ukranian.thexiao77.com`)
       - traefik.http.routers.webhook-ukranian-websecure.tls.certresolver=le
       - traefik.http.routers.webhook-ukranian-websecure.tls=true
       - traefik.http.routers.webhook-ukranian-websecure.entrypoints=https
-      - "traefik.docker.network=proxy"
+      - traefik.docker.network=proxy
     env_file:
       - stack.env
 networks:
