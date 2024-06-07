@@ -8,6 +8,7 @@ pub async fn get_weather(city: &str) -> OpenWeather {
     let client = reqwest::Client::new();
     let response = client
         .get(format!(
+            // TODO: Update openapi to 3.0
             "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric",
             city,
             env::var("openweather_key").expect("Environment key not set up")
