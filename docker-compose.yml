@@ -22,6 +22,7 @@ services:
     environment:
       - TELOXIDE_TOKEN=${TELOXIDE_TOKEN}
       - url=${URL}
+      - openweather_key=${OPENWEATHER_KEY}
 networks:
   proxy:
     external: true
