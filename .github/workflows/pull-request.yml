@@ -52,7 +52,7 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3.3.0
       - name: Build
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v6.3.0
         with:
           context: .
           file: ./Dockerfile
