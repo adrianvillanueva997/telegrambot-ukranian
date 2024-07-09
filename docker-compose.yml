@@ -19,8 +19,6 @@ services:
       - traefik.http.routers.ukranian-https.tls=true
       - traefik.http.routers.ukranian-https.entrypoints=https
       - traefik.docker.network=proxy
-    env_file:
-      - stack.env
 networks:
   proxy:
     external: true
