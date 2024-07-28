@@ -48,11 +48,11 @@ jobs:
       - name: Set up CD
         uses: actions/checkout@v4
       - name: Set up Docker Qemu
-        uses: docker/setup-qemu-action@v3.1.0
+        uses: docker/setup-qemu-action@v3.2.0
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3.4.0
+        uses: docker/setup-buildx-action@v3.5.0
       - name: Build
-        uses: docker/build-push-action@v6.4.1
+        uses: docker/build-push-action@v6.5.0
         with:
           context: .
           file: ./Dockerfile
