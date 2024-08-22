@@ -1,7 +1,11 @@
 pub mod utils;
 pub mod weather;
 
-use teloxide::{prelude::*, types::ParseMode, utils::command::BotCommands};
+use teloxide::{
+    prelude::*,
+    types::{ParseMode, ReplyParameters},
+    utils::command::BotCommands,
+};
 use utils::usernames::{
     AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, MCKAY, RED, SAUTURN,
     THEXIAO77, TOXIC, VICTOR,
@@ -148,11 +152,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                     );
                     bot.send_message(msg.chat.id, message)
                         .parse_mode(ParseMode::Html)
-                        .reply_to_message_id(msg.id)
+                        .reply_parameters(ReplyParameters::new(msg.id))
                         .await?
                 } else {
                     bot.send_message(msg.chat.id, "Ni puta idea de donde esta eso")
-                        .reply_to_message_id(msg.id)
+                        .reply_parameters(ReplyParameters::new(msg.id))
                         .await?
                 }
             }
