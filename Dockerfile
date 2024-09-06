@@ -1,4 +1,4 @@
-FROM rust:1.80.1-bookworm AS build
+FROM rust:1.81.0-bookworm AS build
 WORKDIR /build
 RUN apt-get update && \
     apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
