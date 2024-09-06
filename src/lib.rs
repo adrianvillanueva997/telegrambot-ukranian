@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 pub mod utils;
 pub mod weather;
 
@@ -40,6 +42,18 @@ pub enum Command {
     Everyone,
 }
 
+/// Executes the specified command.
+///
+/// # Arguments
+///
+/// * `bot` - The bot instance.
+/// * `msg` - The message that triggered the command.
+/// * `cmd` - The command to execute.
+///
+/// # Errors
+///
+/// Returns an error if there was a problem executing the command.
+#[allow(clippy::too_many_lines)]
 pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
     match cmd {
         Command::Help => {
@@ -49,10 +63,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         Command::Dota => {
             bot.send_message(
                 msg.chat.id,
-                format!(
-                    "(Dota 2) {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, JAVI, DARKTRAINER, DVDGG, VICTOR, MARIO
-                ),
+                format!("(Dota 2) {THEXIAO77}, {JAVI}, {DARKTRAINER}, {DVDGG}, {VICTOR}, {MARIO}",),
             )
             .await?
         }
@@ -60,8 +71,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Civilization V) {}, {}, {}, {}, {}, {}",
-                    JAVI, DARKTRAINER, SAUTURN, AWE, JAIME, DAVAS
+                    "(Civilization V) {JAVI}, {DARKTRAINER}, {SAUTURN}, {AWE}, {JAIME}, {DAVAS}"
                 ),
             )
             .await?
@@ -70,8 +80,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(CS2) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, DARKTRAINER, SAUTURN, AWE, JAIME, DAVAS, JAVI, RED, DRDVD, TOXIC
+                    "(CS2) {THEXIAO77}, {DARKTRAINER}, {SAUTURN}, {AWE}, {JAIME}, {DAVAS}, {JAVI}, {RED}, {DRDVD}, {TOXIC}"
                 ),
             )
             .await?
@@ -79,7 +88,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         Command::Hunt => {
             bot.send_message(
                 msg.chat.id,
-                format!("(Hunt) {}, {}, {}, {}", DARKTRAINER, SAUTURN, DAVAS, MARIO),
+                format!("(Hunt) {DARKTRAINER}, {SAUTURN}, {DAVAS}, {MARIO}, {TOXIC}"),
             )
             .await?
         }
@@ -87,8 +96,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Pokemon Go) {}, {}, {}, {}, {}",
-                    JAVI, DARKTRAINER, SAUTURN, GARFU, MARIO
+                    "(Pokemon Go) {JAVI}, {DARKTRAINER}, {SAUTURN}, {GARFU}, {MARIO}"
                 ),
             )
             .await?
@@ -97,8 +105,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, JAVI, AWE, SAUTURN, DAVAS, DVDGG, VICTOR, DRDVD, JAIME, DARKTRAINER,
+                    "(Gartic/Pinturillo) {THEXIAO77}, {JAVI}, {AWE}, {SAUTURN}, {DAVAS}, {DVDGG}, {VICTOR}, {DRDVD}, {JAIME}, {DARKTRAINER}",
                 ),
             )
             .await?
@@ -107,8 +114,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Lethal) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    THEXIAO77, JAVI, AWE, VICTOR, DVDGG, DRDVD, MARIO, DARKTRAINER, RED, TOXIC
+                    "(Lethal) {THEXIAO77}, {JAVI}, {AWE}, {VICTOR}, {DVDGG}, {DRDVD}, {MARIO}, {DARKTRAINER}, {RED}, {TOXIC}"
                 ),
             )
             .await?
@@ -122,18 +128,22 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 .await?
             } else {
                 let weather = get_weather(&location).await;
-                if !weather.name.is_empty() {
+                if weather.name.is_empty() {
+                    bot.send_message(msg.chat.id, "Ni puta idea de donde esta eso")
+                        .reply_parameters(ReplyParameters::new(msg.id))
+                        .await?
+                } else {
                     let message = format!(
                         r"<b>Location</b>: {},{} ({},{})
-<b>Current Temperature:</b> {}ºC
-<b>Current weather:</b> {},{}
-<b>Max Temperature:</b> {}ºC
-<b>Min Temperature:</b> {}ºC
-<b>Temperature feels like:</b> {}ºC
-<b>Wind:</b> {}m/s, {}º
-<b>Pressure:</b> {}hPa
-<b>Humidty:</b> {}%
-<b>Visibility:</b> {}m",
+                        <b>Current Temperature:</b> {}ºC
+                        <b>Current weather:</b> {},{}
+                        <b>Max Temperature:</b> {}ºC
+                        <b>Min Temperature:</b> {}ºC
+                        <b>Temperature feels like:</b> {}ºC
+                        <b>Wind:</b> {}m/s, {}º
+                        <b>Pressure:</b> {}hPa
+                        <b>Humidty:</b> {}%
+                        <b>Visibility:</b> {}m",
                         weather.name,
                         weather.sys.country,
                         weather.coord.lon,
@@ -154,10 +164,6 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                         .parse_mode(ParseMode::Html)
                         .reply_parameters(ReplyParameters::new(msg.id))
                         .await?
-                } else {
-                    bot.send_message(msg.chat.id, "Ni puta idea de donde esta eso")
-                        .reply_parameters(ReplyParameters::new(msg.id))
-                        .await?
                 }
             }
         }
@@ -165,22 +171,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "@everyone: {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}",
-                    THEXIAO77,
-                    JAVI,
-                    VICTOR,
-                    DARKTRAINER,
-                    AWE,
-                    TOXIC,
-                    RED,
-                    DVDGG,
-                    GARFU,
-                    SAUTURN,
-                    MARIO,
-                    JAIME,
-                    DAVAS,
-                    DRDVD,
-                    MCKAY,
+                    "@everyone: {THEXIAO77} {JAVI} {VICTOR} {DARKTRAINER} {AWE} {TOXIC} {RED} {DVDGG} {GARFU} {SAUTURN} {MARIO} {JAIME} {DAVAS} {DRDVD} {MCKAY}",
                 ),
             )
             .await?

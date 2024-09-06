@@ -1,2 +1,2 @@
+pub mod model;
 pub mod openweather;
-pub mod weather_model;
