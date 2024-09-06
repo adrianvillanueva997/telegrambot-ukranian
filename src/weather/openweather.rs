@@ -2,8 +2,17 @@ use std::env;
 
 use reqwest::header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE};
 
-use super::weather_model::OpenWeather;
+use super::model::OpenWeather;
 
+/// Retrieves the weather information for a given city.
+///
+/// # Arguments
+///
+/// * `city` - The name of the city.
+///
+/// # Panics
+///
+/// This function will panic if the environment key for `OpenWeather` is not set up.
 pub async fn get_weather(city: &str) -> OpenWeather {
     let client = reqwest::Client::new();
     let response = client
@@ -24,6 +33,6 @@ pub async fn get_weather(city: &str) -> OpenWeather {
     }
     let result = response.json::<OpenWeather>().await;
     result.unwrap_or_else(|err| {
-        panic!("{:?}", err);
+        panic!("{}", err);
     })
 }
