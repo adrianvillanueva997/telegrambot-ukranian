@@ -134,16 +134,16 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                         .await?
                 } else {
                     let message = format!(
-                        r"<b>Location</b>: {},{} ({},{})
-                        <b>Current Temperature:</b> {}ºC
-                        <b>Current weather:</b> {},{}
-                        <b>Max Temperature:</b> {}ºC
-                        <b>Min Temperature:</b> {}ºC
-                        <b>Temperature feels like:</b> {}ºC
-                        <b>Wind:</b> {}m/s, {}º
-                        <b>Pressure:</b> {}hPa
-                        <b>Humidty:</b> {}%
-                        <b>Visibility:</b> {}m",
+r"<b>Location</b>: {},{} ({},{})
+<b>Current Temperature:</b> {}ºC
+<b>Current weather:</b> {},{}
+<b>Max Temperature:</b> {}ºC
+<b>Min Temperature:</b> {}ºC
+<b>Temperature feels like:</b> {}ºC
+<b>Wind:</b> {}m/s, {}º
+<b>Pressure:</b> {}hPa
+<b>Humidty:</b> {}%
+<b>Visibility:</b> {}m",
                         weather.name,
                         weather.sys.country,
                         weather.coord.lon,
