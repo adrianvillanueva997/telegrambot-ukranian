@@ -53,18 +53,3 @@ jobs:
           push: true
           tags: ${{env.REGISTRY}}/${{ env.IMAGE_NAME }}:latest, ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Get current tag
-        id: current_tag
-        run: echo "::set-output name=tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
-        with:
-          tag_name: ${{ steps.current_tag.outputs.tag }}
-          release_name: Release ${{ steps.current_tag.outputs.tag }}
-          draft: false
-          prerelease: false
