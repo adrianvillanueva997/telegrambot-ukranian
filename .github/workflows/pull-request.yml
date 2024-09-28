@@ -9,7 +9,7 @@ env:
 jobs:
   run_clippy:
     name: Run clippy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
@@ -25,7 +25,7 @@ jobs:
 
   build_and_test:
     name: Run tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         toolchain:
@@ -38,7 +38,7 @@ jobs:
       - run: cargo test --verbose
   build_docker_image:
     name: Build docker image
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [build_and_test, run_clippy, docker_lint]
     strategy:
       matrix:
