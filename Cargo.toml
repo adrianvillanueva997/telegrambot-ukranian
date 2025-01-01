@@ -16,6 +16,7 @@ reqwest = { version = "0.12.7", features = ["json"] }
 log = "0.4.21"
 pretty_env_logger = "0.5.0"
 url = "2.5.0"
+lazy_static = "1.5.0"
 
 [profile.release]
 lto = "fat"                 # Link-time optimization
