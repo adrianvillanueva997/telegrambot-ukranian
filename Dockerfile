@@ -1,5 +1,5 @@
 # Build stage
-FROM rust:1.82.0-slim-bookworm AS build
+FROM rust:1.83.0-slim-bookworm AS build
 WORKDIR /build
 
 # Install only necessary build dependencies
