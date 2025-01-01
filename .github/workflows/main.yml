@@ -34,9 +34,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-${{ matrix.architectures }}-buildx-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-${{ matrix.architectures }}-buildx-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@70b2cdc6480c1a8b86edf1777157f8f437de2166
@@ -51,5 +51,5 @@ jobs:
           file: ./Dockerfile
           platforms: ${{ matrix.architectures }}
           push: true
-          tags: ${{env.REGISTRY}}/${{ env.IMAGE_NAME }}:latest, ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest, ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
