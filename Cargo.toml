@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["Adrian Villanueva adrian.villanueva.martinez@outlook.com"]
 description = "A private telegram bot"
 repository = "https://github.com/adrianvillanueva997/telegrambot-ukranian"
-license = "MIT"
+license = "GPL-3.0"
 readme = "README.md"
 
 [dependencies]
