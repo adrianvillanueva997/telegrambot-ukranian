@@ -3,14 +3,11 @@
 pub mod utils;
 pub mod weather;
 
+use crate::utils::usernames::get_telegram_handle;
 use teloxide::{
     prelude::*,
     types::{ParseMode, ReplyParameters},
     utils::command::BotCommands,
-};
-use utils::usernames::{
-    AWE, DARKTRAINER, DAVAS, DRDVD, DVDGG, GARFU, JAIME, JAVI, MARIO, MCKAY, RED, SAUTURN,
-    THEXIAO77, TOXIC, VICTOR,
 };
 use weather::openweather::get_weather;
 
@@ -63,7 +60,15 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         Command::Dota => {
             bot.send_message(
                 msg.chat.id,
-                format!("(Dota 2) {THEXIAO77}, {JAVI}, {DARKTRAINER}, {DVDGG}, {VICTOR}, {MARIO}",),
+                format!(
+                    "(Dota 2) {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("DVDGG").unwrap_or_default(),
+                    get_telegram_handle("VICTOR").unwrap_or_default(),
+                    get_telegram_handle("MARIO").unwrap_or_default(),
+                ),
             )
             .await?
         }
@@ -71,7 +76,13 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Civilization V) {JAVI}, {DARKTRAINER}, {SAUTURN}, {AWE}, {JAIME}, {DAVAS}"
+                    "(Civilization V) {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("AWE").unwrap_or_default(),
+                    get_telegram_handle("JAIME").unwrap_or_default(),
+                    get_telegram_handle("DAVAS").unwrap_or_default(),
                 ),
             )
             .await?
@@ -80,7 +91,17 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(CS2) {THEXIAO77}, {DARKTRAINER}, {SAUTURN}, {AWE}, {JAIME}, {DAVAS}, {JAVI}, {RED}, {DRDVD}, {TOXIC}"
+                    "(CS2) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("AWE").unwrap_or_default(),
+                    get_telegram_handle("JAIME").unwrap_or_default(),
+                    get_telegram_handle("DAVAS").unwrap_or_default(),
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("RED").unwrap_or_default(),
+                    get_telegram_handle("DRDVD").unwrap_or_default(),
+                    get_telegram_handle("TOXIC").unwrap_or_default(),
                 ),
             )
             .await?
@@ -88,7 +109,14 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         Command::Hunt => {
             bot.send_message(
                 msg.chat.id,
-                format!("(Hunt) {DARKTRAINER}, {SAUTURN}, {DAVAS}, {MARIO}, {TOXIC}"),
+                format!(
+                    "(Hunt) {}, {}, {}, {}, {}",
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("DAVAS").unwrap_or_default(),
+                    get_telegram_handle("MARIO").unwrap_or_default(),
+                    get_telegram_handle("TOXIC").unwrap_or_default(),
+                ),
             )
             .await?
         }
@@ -96,7 +124,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Pokemon Go) {JAVI}, {DARKTRAINER}, {SAUTURN}, {GARFU}, {MARIO}"
+                    "(Pokemon Go) {}, {}, {}, {}, {}",
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("GARFU").unwrap_or_default(),
+                    get_telegram_handle("MARIO").unwrap_or_default(),
                 ),
             )
             .await?
@@ -105,7 +138,17 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Gartic/Pinturillo) {THEXIAO77}, {JAVI}, {AWE}, {SAUTURN}, {DAVAS}, {DVDGG}, {VICTOR}, {DRDVD}, {JAIME}, {DARKTRAINER}",
+                    "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("AWE").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("DAVAS").unwrap_or_default(),
+                    get_telegram_handle("DVDGG").unwrap_or_default(),
+                    get_telegram_handle("VICTOR").unwrap_or_default(),
+                    get_telegram_handle("DRDVD").unwrap_or_default(),
+                    get_telegram_handle("JAIME").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
                 ),
             )
             .await?
@@ -114,7 +157,17 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Lethal) {THEXIAO77}, {JAVI}, {AWE}, {VICTOR}, {DVDGG}, {DRDVD}, {MARIO}, {DARKTRAINER}, {RED}, {TOXIC}"
+                    "(Lethal) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("AWE").unwrap_or_default(),
+                    get_telegram_handle("VICTOR").unwrap_or_default(),
+                    get_telegram_handle("DVDGG").unwrap_or_default(),
+                    get_telegram_handle("DRDVD").unwrap_or_default(),
+                    get_telegram_handle("MARIO").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("RED").unwrap_or_default(),
+                    get_telegram_handle("TOXIC").unwrap_or_default(),
                 ),
             )
             .await?
@@ -134,26 +187,31 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                         .await?
                 } else {
                     let message = format!(
-r"<b>Location</b>: {},{} ({},{})
-<b>Current Temperature:</b> {}ºC
-<b>Current weather:</b> {},{}
-<b>Max Temperature:</b> {}ºC
-<b>Min Temperature:</b> {}ºC
-<b>Temperature feels like:</b> {}ºC
-<b>Wind:</b> {}m/s, {}º
-<b>Pressure:</b> {}hPa
-<b>Humidty:</b> {}%
-<b>Visibility:</b> {}m",
+                        r#"🌍 <b>{}, {}</b>
+📍 Coordinates: {:.2}°, {:.2}°
+
+🌡️ <b>Temperature</b>
+• Current: {}°C (Feels like: {}°C)
+• Max: {}°C | Min: {}°C
+
+🌤️ <b>Weather Conditions</b>
+• {}, {}
+
+💨 <b>Wind & Atmosphere</b>
+• Wind: {}m/s at {}°
+• Pressure: {}hPa
+• Humidity: {}%
+• Visibility: {}m"#,
                         weather.name,
                         weather.sys.country,
                         weather.coord.lon,
                         weather.coord.lat,
                         weather.main.temp,
-                        weather.weather[0].main,
-                        weather.weather[0].description,
+                        weather.main.feels_like,
                         weather.main.temp_max,
                         weather.main.temp_min,
-                        weather.main.feels_like,
+                        weather.weather[0].main,
+                        weather.weather[0].description,
                         weather.wind.speed,
                         weather.wind.deg,
                         weather.main.pressure,
@@ -171,7 +229,22 @@ r"<b>Location</b>: {},{} ({},{})
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "@everyone: {THEXIAO77} {JAVI} {VICTOR} {DARKTRAINER} {AWE} {TOXIC} {RED} {DVDGG} {GARFU} {SAUTURN} {MARIO} {JAIME} {DAVAS} {DRDVD} {MCKAY}",
+                    "@everyone: {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
+                    get_telegram_handle("JAVI").unwrap_or_default(),
+                    get_telegram_handle("VICTOR").unwrap_or_default(),
+                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle("AWE").unwrap_or_default(),
+                    get_telegram_handle("TOXIC").unwrap_or_default(),
+                    get_telegram_handle("RED").unwrap_or_default(),
+                    get_telegram_handle("DVDGG").unwrap_or_default(),
+                    get_telegram_handle("GARFU").unwrap_or_default(),
+                    get_telegram_handle("SAUTURN").unwrap_or_default(),
+                    get_telegram_handle("MARIO").unwrap_or_default(),
+                    get_telegram_handle("JAIME").unwrap_or_default(),
+                    get_telegram_handle("DAVAS").unwrap_or_default(),
+                    get_telegram_handle("DRDVD").unwrap_or_default(),
+                    get_telegram_handle("MCKAY").unwrap_or_default(),
                 ),
             )
             .await?

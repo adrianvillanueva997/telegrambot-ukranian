@@ -2,59 +2,67 @@ name: Cargo Build & Test
 
 on:
   pull_request:
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "LICENSE"
 
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
 
 jobs:
-  run_clippy:
-    name: Run clippy
+  check:
+    name: Check
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
-      - run: cargo clippy
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo check --all-features
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-24.04
+    needs: check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy --all-features -- -D warnings
+
   docker_lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: hadolint/hadolint:latest-alpine
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          apk add --no-cache make
-          make hadolint
+      - run: hadolint Dockerfile
 
-  build_and_test:
-    name: Run tests
+  build_docker:
+    name: Build Docker
+    needs: [clippy, docker_lint]
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        toolchain:
-          - stable
-          - beta
+        platform: [linux/amd64]
     steps:
       - uses: actions/checkout@v4
-      - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
-      - run: cargo build
-      - run: cargo test --verbose
-  build_docker_image:
-    name: Build docker image
-    runs-on: ubuntu-24.04
-    needs: [build_and_test, run_clippy, docker_lint]
-    strategy:
-      matrix:
-        architectures:
-          - linux/amd64
-    steps:
-      - name: Set up CD
-        uses: actions/checkout@v4
-      - name: Set up Docker Qemu
-        uses: docker/setup-qemu-action@v3.2.0
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3.7.1
-      - name: Build
-        uses: docker/build-push-action@v6.9.0
+      - uses: docker/setup-qemu-action@v3.2.0
+      - uses: docker/setup-buildx-action@v3.7.1
+        with:
+          buildkitd-flags: --debug
+      - uses: docker/build-push-action@v6.9.0
         with:
           context: .
           file: ./Dockerfile
-          platforms: ${{ matrix.architectures }}
+          platforms: ${{ matrix.platform }}
           push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

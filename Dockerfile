@@ -1,25 +1,44 @@
-FROM rust:1.82.0-bookworm AS build
+# Build stage
+FROM rust:1.82.0-slim-bookworm AS build
 WORKDIR /build
+
+# Install only necessary build dependencies
 RUN apt-get update && \
-    apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* /var/tmp/*
-COPY . .
+    apt-get install -y --no-install-recommends \
+    pkg-config \
+    libssl-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy only files needed for build first
+COPY Cargo.toml Cargo.lock ./
+
+# Create dummy main.rs to cache dependencies
+RUN mkdir src && \
+    echo "fn main() {}" > src/main.rs && \
+    cargo build --release && \
+    rm -rf src
+
+# Now copy actual source code
+COPY src ./src
+
+# Build the actual application
 RUN cargo build --release
 
-FROM ubuntu:noble-20241015 AS prod
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main" | tee /etc/apt/sources.list.d/focal-security.list
-RUN apt-get update && \
-    apt-get install -y adduser apt-utils ca-certificates pkg-config libssl-dev libssl1.1 --no-install-recommends && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* /var/tmp/*
+# Production stage
+FROM debian:bookworm-slim AS prod
 WORKDIR /app
+
+# Install runtime dependencies only
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    libssl3 && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -r -s /bin/false appuser
+
 COPY --from=build /build/target/release/telegrambot_ukranian .
-RUN adduser --disabled-password appuser
+
 USER appuser
 ENV RUST_LOG=info
 EXPOSE 8080
-ENTRYPOINT [ "./telegrambot_ukranian" ]
+ENTRYPOINT ["./telegrambot_ukranian"]
