@@ -2,8 +2,8 @@
 name = "telegrambot_ukranian"
 version = "0.1.0"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
-description = "A Telegram bot for Ukrainian language"
+authors = ["Adrian Villanueva adrian.villanueva.martinez@outlook.com"]
+description = "A private telegram bot"
 repository = "https://github.com/adrianvillanueva997/telegrambot-ukranian"
 license = "MIT"
 readme = "README.md"
