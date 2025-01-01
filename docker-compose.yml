@@ -1,12 +1,29 @@
----
+version: "3.9"
 name: telegrambot_ukranian
+
 services:
   telegrambot_ukranian:
     image: ghcr.io/adrianvillanueva997/telegrambot-ukranian:v5.6.5
-    networks:
-      - proxy
     container_name: telegrambot_ukranian
     restart: unless-stopped
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.50"
+        reservations:
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - TELOXIDE_TOKEN=${TELOXIDE_TOKEN}
+      - url=${URL}
+      - openweather_key=${OPENWEATHER_KEY}
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.ukranian-redirect-https.redirectscheme.scheme=https
@@ -19,10 +36,7 @@ services:
       - traefik.http.routers.ukranian-https.tls=true
       - traefik.http.routers.ukranian-https.entrypoints=https
       - traefik.docker.network=proxy
-    environment:
-      - TELOXIDE_TOKEN=${TELOXIDE_TOKEN}
-      - url=${URL}
-      - openweather_key=${OPENWEATHER_KEY}
+
 networks:
   proxy:
     external: true
