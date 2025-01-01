@@ -119,7 +119,9 @@ lazy_static! {
     };
 }
 
+/// Get the telegram handle of a user by their name (case-sensitive)
 // Helper functions
+#[must_use]
 pub fn get_telegram_handle(name: &str) -> Option<&'static str> {
     USERS.get(name).map(|user| user.telegram_handle)
 }
