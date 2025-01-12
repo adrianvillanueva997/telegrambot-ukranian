@@ -1,127 +1,55 @@
 use lazy_static::lazy_static;
 use std::collections::HashMap;
 
-#[derive(Debug, Clone)]
-pub struct User {
-    pub name: &'static str,
-    pub telegram_handle: &'static str,
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq)]
+pub enum Username {
+    TheXiao77,
+    Javi,
+    Victor,
+    DarkTrainer,
+    Awe,
+    Toxic,
+    Red,
+    Dvdgg,
+    Garfu,
+    Sauturn,
+    Mario,
+    Jaime,
+    Davas,
+    DrDvd,
+    McKay,
 }
 
 lazy_static! {
-    pub static ref USERS: HashMap<&'static str, User> = {
+    static ref HANDLES: HashMap<Username, &'static str> = {
         let mut m = HashMap::new();
-        m.insert(
-            "THEXIAO77",
-            User {
-                name: "THEXIAO77",
-                telegram_handle: "@adrianv5x",
-            },
-        );
-        m.insert(
-            "JAVI",
-            User {
-                name: "JAVI",
-                telegram_handle: "@LilNarwhal",
-            },
-        );
-        m.insert(
-            "VICTOR",
-            User {
-                name: "VICTOR",
-                telegram_handle: "@SanZ97xX",
-            },
-        );
-        m.insert(
-            "DARKTRAINER",
-            User {
-                name: "DARKTRAINER",
-                telegram_handle: "@DarkTrainer",
-            },
-        );
-        m.insert(
-            "AWE",
-            User {
-                name: "AWE",
-                telegram_handle: "@JoseAwe",
-            },
-        );
-        m.insert(
-            "TOXIC",
-            User {
-                name: "TOXIC",
-                telegram_handle: "@txc450",
-            },
-        );
-        m.insert(
-            "RED",
-            User {
-                name: "RED",
-                telegram_handle: "@REDMSR",
-            },
-        );
-        m.insert(
-            "DVDGG",
-            User {
-                name: "DVDGG",
-                telegram_handle: "@Dvdgg",
-            },
-        );
-        m.insert(
-            "GARFU",
-            User {
-                name: "GARFU",
-                telegram_handle: "@Garfu01",
-            },
-        );
-        m.insert(
-            "SAUTURN",
-            User {
-                name: "SAUTURN",
-                telegram_handle: "@Sauturn",
-            },
-        );
-        m.insert(
-            "MARIO",
-            User {
-                name: "MARIO",
-                telegram_handle: "@CecilioGil",
-            },
-        );
-        m.insert(
-            "JAIME",
-            User {
-                name: "JAIME",
-                telegram_handle: "@jaimegsov",
-            },
-        );
-        m.insert(
-            "DAVAS",
-            User {
-                name: "DAVAS",
-                telegram_handle: "@DavasJoe",
-            },
-        );
-        m.insert(
-            "DRDVD",
-            User {
-                name: "DRDVD",
-                telegram_handle: "@THEDRDVD",
-            },
-        );
-        m.insert(
-            "MCKAY",
-            User {
-                name: "MCKAY",
-                telegram_handle: "@DoctorMckay",
-            },
-        );
+        m.insert(Username::TheXiao77, "@adrianv5x");
+        m.insert(Username::Javi, "@LilNarwhal");
+        m.insert(Username::Victor, "@SanZ97xX");
+        m.insert(Username::DarkTrainer, "@DarkTrainer");
+        m.insert(Username::Awe, "@JoseAwe");
+        m.insert(Username::Toxic, "@txc450");
+        m.insert(Username::Red, "@REDMSR");
+        m.insert(Username::Dvdgg, "@Dvdgg");
+        m.insert(Username::Garfu, "@Garfu01");
+        m.insert(Username::Sauturn, "@Sauturn");
+        m.insert(Username::Mario, "@CecilioGil");
+        m.insert(Username::Jaime, "@jaimegsov");
+        m.insert(Username::Davas, "@DavasJoe");
+        m.insert(Username::DrDvd, "@THEDRDVD");
+        m.insert(Username::McKay, "@DoctorMckay");
         m
     };
 }
 
-/// Get the telegram handle of a user by their name (case-sensitive)
-// Helper functions
+impl Username {
+    #[must_use]
+    pub fn telegram_handle(&self) -> &'static str {
+        HANDLES[self]
+    }
+}
+
 #[must_use]
-pub fn get_telegram_handle(name: &str) -> Option<&'static str> {
-    USERS.get(name).map(|user| user.telegram_handle)
+pub fn get_telegram_handle(user: Username) -> &'static str {
+    user.telegram_handle()
 }
