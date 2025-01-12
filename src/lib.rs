@@ -9,6 +9,7 @@ use teloxide::{
     types::{ParseMode, ReplyParameters},
     utils::command::BotCommands,
 };
+use utils::usernames::Username;
 use weather::openweather::get_weather;
 
 #[derive(BotCommands, Clone)]
@@ -34,9 +35,7 @@ pub enum Command {
     #[command(description = "Let's play some garticphone!")]
     Weather { location: String },
     #[command(description = "everyone")]
-    Lethal,
-    #[command(description = "lethal")]
-    Everyone,
+    Marvel,
 }
 
 /// Executes the specified command.
@@ -62,12 +61,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Dota 2) {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("DVDGG").unwrap_or_default(),
-                    get_telegram_handle("VICTOR").unwrap_or_default(),
-                    get_telegram_handle("MARIO").unwrap_or_default(),
+                    get_telegram_handle(Username::TheXiao77),
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::DarkTrainer),
+                    get_telegram_handle(Username::Dvdgg),
+                    get_telegram_handle(Username::Victor),
+                    get_telegram_handle(Username::Mario),
                 ),
             )
             .await?
@@ -77,12 +76,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Civilization V) {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("AWE").unwrap_or_default(),
-                    get_telegram_handle("JAIME").unwrap_or_default(),
-                    get_telegram_handle("DAVAS").unwrap_or_default(),
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::DarkTrainer),
+                    get_telegram_handle(Username::Sauturn),
+                    get_telegram_handle(Username::Awe),
+                    get_telegram_handle(Username::Jaime),
+                    get_telegram_handle(Username::Davas),
                 ),
             )
             .await?
@@ -92,16 +91,16 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(CS2) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("AWE").unwrap_or_default(),
-                    get_telegram_handle("JAIME").unwrap_or_default(),
-                    get_telegram_handle("DAVAS").unwrap_or_default(),
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("RED").unwrap_or_default(),
-                    get_telegram_handle("DRDVD").unwrap_or_default(),
-                    get_telegram_handle("TOXIC").unwrap_or_default(),
+                    get_telegram_handle(Username::TheXiao77),
+                    get_telegram_handle(Username::DarkTrainer),
+                    get_telegram_handle(Username::Sauturn),
+                    get_telegram_handle(Username::Awe),
+                    get_telegram_handle(Username::Jaime),
+                    get_telegram_handle(Username::Davas),
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::Red),
+                    get_telegram_handle(Username::DrDvd),
+                    get_telegram_handle(Username::Toxic),
                 ),
             )
             .await?
@@ -111,11 +110,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Hunt) {}, {}, {}, {}, {}",
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("DAVAS").unwrap_or_default(),
-                    get_telegram_handle("MARIO").unwrap_or_default(),
-                    get_telegram_handle("TOXIC").unwrap_or_default(),
+                    get_telegram_handle(Username::DarkTrainer),
+                    get_telegram_handle(Username::Sauturn),
+                    get_telegram_handle(Username::Davas),
+                    get_telegram_handle(Username::Mario),
+                    get_telegram_handle(Username::Toxic),
                 ),
             )
             .await?
@@ -125,11 +124,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Pokemon Go) {}, {}, {}, {}, {}",
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("GARFU").unwrap_or_default(),
-                    get_telegram_handle("MARIO").unwrap_or_default(),
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::DarkTrainer),
+                    get_telegram_handle(Username::Sauturn),
+                    get_telegram_handle(Username::Garfu),
+                    get_telegram_handle(Username::Mario),
                 ),
             )
             .await?
@@ -139,35 +138,29 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "(Gartic/Pinturillo) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("AWE").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("DAVAS").unwrap_or_default(),
-                    get_telegram_handle("DVDGG").unwrap_or_default(),
-                    get_telegram_handle("VICTOR").unwrap_or_default(),
-                    get_telegram_handle("DRDVD").unwrap_or_default(),
-                    get_telegram_handle("JAIME").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
+                    get_telegram_handle(Username::TheXiao77),
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::Awe),
+                    get_telegram_handle(Username::Sauturn),
+                    get_telegram_handle(Username::Davas),
+                    get_telegram_handle(Username::Dvdgg),
+                    get_telegram_handle(Username::Victor),
+                    get_telegram_handle(Username::DrDvd),
+                    get_telegram_handle(Username::Jaime),
+                    get_telegram_handle(Username::DarkTrainer),
                 ),
             )
             .await?
         }
-        Command::Lethal => {
+        Command::Marvel => {
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Lethal) {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("AWE").unwrap_or_default(),
-                    get_telegram_handle("VICTOR").unwrap_or_default(),
-                    get_telegram_handle("DVDGG").unwrap_or_default(),
-                    get_telegram_handle("DRDVD").unwrap_or_default(),
-                    get_telegram_handle("MARIO").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("RED").unwrap_or_default(),
-                    get_telegram_handle("TOXIC").unwrap_or_default(),
+                    "(Marvel) {}, {}, {}, {}",
+                    get_telegram_handle(Username::Javi),
+                    get_telegram_handle(Username::Victor),
+                    get_telegram_handle(Username::Mario),
+                    get_telegram_handle(Username::DarkTrainer),
                 ),
             )
             .await?
@@ -224,30 +217,6 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                         .await?
                 }
             }
-        }
-        Command::Everyone => {
-            bot.send_message(
-                msg.chat.id,
-                format!(
-                    "@everyone: {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
-                    get_telegram_handle("THEXIAO77").unwrap_or_default(),
-                    get_telegram_handle("JAVI").unwrap_or_default(),
-                    get_telegram_handle("VICTOR").unwrap_or_default(),
-                    get_telegram_handle("DARKTRAINER").unwrap_or_default(),
-                    get_telegram_handle("AWE").unwrap_or_default(),
-                    get_telegram_handle("TOXIC").unwrap_or_default(),
-                    get_telegram_handle("RED").unwrap_or_default(),
-                    get_telegram_handle("DVDGG").unwrap_or_default(),
-                    get_telegram_handle("GARFU").unwrap_or_default(),
-                    get_telegram_handle("SAUTURN").unwrap_or_default(),
-                    get_telegram_handle("MARIO").unwrap_or_default(),
-                    get_telegram_handle("JAIME").unwrap_or_default(),
-                    get_telegram_handle("DAVAS").unwrap_or_default(),
-                    get_telegram_handle("DRDVD").unwrap_or_default(),
-                    get_telegram_handle("MCKAY").unwrap_or_default(),
-                ),
-            )
-            .await?
         }
     };
     Ok(())
