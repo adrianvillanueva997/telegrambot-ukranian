@@ -3,7 +3,7 @@ name: telegrambot_ukranian
 
 services:
   telegrambot_ukranian:
-    image: ghcr.io/adrianvillanueva997/telegrambot-ukranian:v5.7.1
+    image: ghcr.io/adrianvillanueva997/telegrambot-ukranian:v5.8.0
     container_name: telegrambot_ukranian
     restart: unless-stopped
     networks:
