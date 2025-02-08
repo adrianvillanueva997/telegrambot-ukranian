@@ -52,7 +52,7 @@ jobs:
         platform: [linux/amd64]
     steps:
       - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
-      - uses: docker/setup-qemu-action@f30d974279f970cd3ed4ee3bcf1ff7795e271f00
+      - uses: docker/setup-qemu-action@4574d27a4764455b42196d70a065bc6853246a25
       - uses: docker/setup-buildx-action@ba31df4664624f17e1b1ef1c9c85ed1ca9463a6d
         with:
           buildkitd-flags: --debug
