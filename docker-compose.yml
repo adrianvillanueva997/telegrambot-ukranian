@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.ukranian-http.rule=Host(`ukranian.thexiao77.com`)
       - traefik.http.routers.ukranian-http.entrypoints=http
       - traefik.http.routers.ukranian-https.rule=Host(`ukranian.thexiao77.com`)
-      - traefik.http.routers.ukranian-https.tls.certresolver=le
+      - traefik.http.routers.ukranian-https.tls.certresolver=letsencrypt
       - traefik.http.routers.ukranian-https.tls=true
       - traefik.http.routers.ukranian-https.entrypoints=https
       - traefik.docker.network=proxy
