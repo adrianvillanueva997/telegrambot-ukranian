@@ -19,7 +19,7 @@ async fn main() {
     let listener = webhooks::axum(bot.clone(), webhooks::Options::new(addr, url.clone()))
         .await
         .expect("Couldn't setup webhook");
-    info!("Running on {} {}", url, addr);
+    info!("Running on {url} {addr}");
 
     Command::repl_with_listener(bot, commands, listener).await;
 }
