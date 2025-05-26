@@ -18,20 +18,20 @@ pretty_env_logger = "0.5.0"
 url = "2.5.0"
 
 [profile.release]
-lto = "fat"                 # Link-time optimization
-codegen-units = 1          # Optimize for size
-opt-level = 3              # Maximum optimization
-panic = "abort"            # Remove panic unwinding code
-strip = true              # Remove debug symbols
-debug = false             # No debug info
+lto = "fat"       # Link-time optimization
+codegen-units = 1 # Optimize for size
+opt-level = 3     # Maximum optimization
+panic = "abort"   # Remove panic unwinding code
+strip = true      # Remove debug symbols
+debug = false     # No debug info
 
 [profile.dev]
-opt-level = 0             # No optimization for faster compilation
-debug = true              # Full debug info
+opt-level = 0 # No optimization for faster compilation
+debug = true  # Full debug info
 
 [profile.dev.package."*"]
-opt-level = 2             # Better optimization for dependencies
+opt-level = 2 # Better optimization for dependencies
 
 [profile.test]
-opt-level = 1             # Basic optimizations for tests
-debug = true              # Keep debug info for tests
+opt-level = 1 # Basic optimizations for tests
+debug = true  # Keep debug info for tests
