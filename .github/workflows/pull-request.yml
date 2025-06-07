@@ -16,7 +16,7 @@ jobs:
     name: Check
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - uses: actions-rust-lang/setup-rust-toolchain@9d7e65c320fdb52dcd45ffaa68deb6c02c8754d9
         with:
           toolchain: stable
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: check
     steps:
-      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - uses: actions-rust-lang/setup-rust-toolchain@9d7e65c320fdb52dcd45ffaa68deb6c02c8754d9
         with:
           toolchain: stable
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-24.04
     container: hadolint/hadolint:latest-alpine
     steps:
-      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - run: hadolint Dockerfile
 
   build_docker:
@@ -51,7 +51,7 @@ jobs:
       matrix:
         platform: [linux/amd64]
     steps:
-      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - uses: docker/setup-qemu-action@737ba1e397ec2caff0d098f75e1136f9a926dc0a
       - uses: docker/setup-buildx-action@3f1544eb9eff0b4d4d279b33f704a06fcf8d0e43
         with:
