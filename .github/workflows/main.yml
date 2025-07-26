@@ -19,7 +19,7 @@ jobs:
           - linux/amd64
     steps:
       - name: Set up CD
-        uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+        uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
       - name: Set up Docker Qemu
         uses: docker/setup-qemu-action@737ba1e397ec2caff0d098f75e1136f9a926dc0a
       - name: Setup Docker Buildx
