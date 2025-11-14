@@ -1,4 +1,4 @@
-FROM rust:1.91.0-bookworm AS build
+FROM rust:1.91.1-bookworm AS build
 WORKDIR /build
 RUN apt-get update && \
     apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
@@ -8,7 +8,7 @@ RUN apt-get update && \
 COPY . .
 RUN cargo build --release
 
-FROM ubuntu:noble-20251001 AS prod
+FROM ubuntu:noble-20251013 AS prod
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main" | tee /etc/apt/sources.list.d/focal-security.list
 RUN apt-get update && \
