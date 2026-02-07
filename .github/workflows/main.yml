@@ -34,7 +34,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITUHB_TOKEN}}
+          password: ${{ secrets.GITHUB_TOKEN}}
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
