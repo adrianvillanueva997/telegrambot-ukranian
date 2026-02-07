@@ -34,8 +34,8 @@ pub enum Command {
     Telefonillo,
     #[command(description = "Let's play some garticphone!")]
     Weather { location: String },
-    #[command(description = "everyone")]
-    Marvel,
+    #[command(description = "Let's play some deadlock!")]
+    Deadlock,
 }
 
 /// Executes the specified command.
@@ -56,11 +56,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(msg.chat.id, Command::descriptions().to_string())
                 .await?
         }
-        Command::Dota => {
+
+        Command::Deadlock | Command::Dota => {
             bot.send_message(
                 msg.chat.id,
                 format!(
-                    "(Dota 2) {}, {}, {}, {}, {}, {}",
+                    "(Dota/Deadlock) {}, {}, {}, {}, {}, {}",
                     get_telegram_handle(Username::TheXiao77),
                     get_telegram_handle(Username::Javi),
                     get_telegram_handle(Username::DarkTrainer),
@@ -71,6 +72,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             )
             .await?
         }
+
         Command::Civ => {
             bot.send_message(
                 msg.chat.id,
@@ -86,6 +88,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             )
             .await?
         }
+
         Command::Cs => {
             bot.send_message(
                 msg.chat.id,
@@ -133,6 +136,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             )
             .await?
         }
+
         Command::Telefonillo => {
             bot.send_message(
                 msg.chat.id,
@@ -152,19 +156,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             )
             .await?
         }
-        Command::Marvel => {
-            bot.send_message(
-                msg.chat.id,
-                format!(
-                    "(Marvel) {}, {}, {}, {}",
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::Victor),
-                    get_telegram_handle(Username::Mario),
-                    get_telegram_handle(Username::DarkTrainer),
-                ),
-            )
-            .await?
-        }
+
         Command::Weather { location } => {
             if location.is_empty() {
                 bot.send_message(
