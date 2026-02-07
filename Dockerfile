@@ -1,25 +1,24 @@
 FROM rust:1.93.0-bookworm AS build
 WORKDIR /build
 RUN apt-get update && \
-    apt-get install -y apt-utils pkg-config libssl-dev --no-install-recommends && \
+    apt-get install -y --no-install-recommends pkg-config libssl-dev && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* /var/tmp/*
-COPY . .
-RUN cargo build --release
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY Cargo.toml Cargo.lock* ./
+COPY src src
+RUN cargo build --release --locked
 
-FROM ubuntu:noble-20260113 AS prod
+FROM debian:bookworm-slim AS prod
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main" | tee /etc/apt/sources.list.d/focal-security.list
 RUN apt-get update && \
-    apt-get install -y adduser apt-utils ca-certificates pkg-config libssl-dev libssl1.1 --no-install-recommends && \
+    apt-get install -y --no-install-recommends ca-certificates libssl3 && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    useradd -r -u 1000 appuser
 WORKDIR /app
-COPY --from=build /build/target/release/telegrambot_ukranian .
-RUN adduser --disabled-password appuser
+COPY --from=build /build/target/release/telegrambot_ukranian ./bot
+RUN chown appuser:appuser /app
 USER appuser
 ENV RUST_LOG=info
 EXPOSE 8080
-ENTRYPOINT [ "./telegrambot_ukranian" ]
+ENTRYPOINT ["./bot"]
