@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
-      - uses: actions-rust-lang/setup-rust-toolchain@02be93da58aa71fb456aa9c43b301149248829d8
+      - uses: actions-rust-lang/setup-rust-toolchain@806aa7ddf5d59f36fb30048411f6bde29364a53f
         with:
           toolchain: stable
       - uses: Swatinem/rust-cache@v2
@@ -29,7 +29,7 @@ jobs:
     needs: check
     steps:
       - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
-      - uses: actions-rust-lang/setup-rust-toolchain@02be93da58aa71fb456aa9c43b301149248829d8
+      - uses: actions-rust-lang/setup-rust-toolchain@806aa7ddf5d59f36fb30048411f6bde29364a53f
         with:
           toolchain: stable
           components: clippy
