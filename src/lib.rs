@@ -64,6 +64,8 @@ pub enum Command {
     Weather { location: String },
     #[command(description = "Let's play some deadlock!")]
     Deadlock,
+    #[command(description = "Let's play some overwatch")]
+    Ovewatch,
 }
 
 /// Executes the specified command.
@@ -83,6 +85,18 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         Command::Help => {
             bot.send_message(msg.chat.id, Command::descriptions().to_string())
                 .await?
+        }
+        Command::Ovewatch => {
+            bot.send_message(msg.chat.id, format!("🎮 <b>Overwatch </b>\n\n
+                {} {} {} {} {} ", 
+                get_telegram_handle(Username::Javi),
+                get_telegram_handle(Username::DarkTrainer),
+                get_telegram_handle(Username::Red),
+                get_telegram_handle(Username::Awe),
+                get_telegram_handle(Username::Mario)
+                ),
+            ).parse_mode(ParseMode::Html)
+            .await?
         }
 
         Command::Deadlock | Command::Dota => {
