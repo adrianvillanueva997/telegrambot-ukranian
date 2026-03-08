@@ -3,11 +3,11 @@
 pub mod utils;
 pub mod weather;
 
-use crate::utils::usernames::{self, get_telegram_handle};
+use crate::utils::usernames::get_telegram_handle;
 use chrono::DateTime;
 use teloxide::{
     prelude::*,
-    types::{ParseMode, ReplyParameters, User},
+    types::{ParseMode, ReplyParameters},
     utils::command::BotCommands,
 };
 use utils::usernames::Username;
