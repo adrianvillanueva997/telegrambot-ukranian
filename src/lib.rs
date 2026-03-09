@@ -65,7 +65,7 @@ pub enum Command {
     #[command(description = "Let's play some deadlock!")]
     Deadlock,
     #[command(description = "Let's play some overwatch")]
-    Ovewatch,
+    Overwatch,
 }
 
 /// Executes the specified command.
@@ -86,9 +86,9 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
             bot.send_message(msg.chat.id, Command::descriptions().to_string())
                 .await?
         }
-        Command::Ovewatch => {
+        Command::Overwatch => {
             bot.send_message(msg.chat.id, format!("🎮 <b>Overwatch </b>\n\n
-                {} {} {} {} {} ", 
+                {} {} {} {} {} ",
                 get_telegram_handle(Username::Javi),
                 get_telegram_handle(Username::DarkTrainer),
                 get_telegram_handle(Username::Red),
