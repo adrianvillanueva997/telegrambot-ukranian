@@ -87,8 +87,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 .await?
         }
         Command::Overwatch => {
-            bot.send_message(msg.chat.id, format!("🎮 <b>Overwatch </b>\n\n
-                {} {} {} {} {} ",
+            bot.send_message(msg.chat.id, format!("🎮 <b>Overwatch </b>\n\n {} {} {} {} {} ",
                 get_telegram_handle(Username::Javi),
                 get_telegram_handle(Username::DarkTrainer),
                 get_telegram_handle(Username::Red),
