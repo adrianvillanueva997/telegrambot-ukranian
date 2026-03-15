@@ -18,6 +18,7 @@ pub enum Username {
     Davas,
     DrDvd,
     McKay,
+    Andres,
 }
 
 static HANDLES: LazyLock<HashMap<Username, &'static str>> = LazyLock::new(|| {
@@ -37,6 +38,7 @@ static HANDLES: LazyLock<HashMap<Username, &'static str>> = LazyLock::new(|| {
     m.insert(Username::Davas, "@DavasJoe");
     m.insert(Username::DrDvd, "@THEDRDVD");
     m.insert(Username::McKay, "@DoctorMckay");
+    m.insert(Username::Andres, "@AndresMorenoBlu");
     m
 });
 
