@@ -1,7 +1,5 @@
 use std::env;
 
-use reqwest::header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE};
-
 use super::model::OpenWeather;
 
 /// Retrieves the weather information for a given city.
@@ -21,9 +19,6 @@ pub async fn get_weather(city: &str) -> OpenWeather {
             city,
             env::var("openweather_key").expect("Environment key not set up")
         ))
-        .header(AUTHORIZATION, "Bearer [AUTH_TOKEN]")
-        .header(CONTENT_TYPE, "application/json")
-        .header(ACCEPT, "application/json")
         .send()
         .await
         .unwrap();
@@ -31,7 +26,5 @@ pub async fn get_weather(city: &str) -> OpenWeather {
         return OpenWeather::default();
     }
     let result = response.json::<OpenWeather>().await;
-    result.unwrap_or_else(|err| {
-        panic!("{}", err);
-    })
+    result.unwrap()
 }

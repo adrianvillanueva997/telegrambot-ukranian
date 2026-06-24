@@ -3,7 +3,6 @@
 pub mod utils;
 pub mod weather;
 
-use crate::utils::usernames::get_telegram_handle;
 use chrono::DateTime;
 use teloxide::{
     prelude::*,
@@ -88,11 +87,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
         }
         Command::Overwatch => {
             bot.send_message(msg.chat.id, format!("🎮 <b>Overwatch </b>\n {} {} {} {} {} ",
-                get_telegram_handle(Username::Javi),
-                get_telegram_handle(Username::DarkTrainer),
-                get_telegram_handle(Username::Red),
-                get_telegram_handle(Username::Andres),
-                get_telegram_handle(Username::Mario)
+                Username::Javi.telegram_handle(),
+                Username::DarkTrainer.telegram_handle(),
+                Username::Red.telegram_handle(),
+                Username::Andres.telegram_handle(),
+                Username::Mario.telegram_handle()
                 ),
             ).parse_mode(ParseMode::Html)
             .await?
@@ -103,12 +102,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🎮 <b>Defensa del viejales</b>\n\n⚔️ <i>Dota/Deadlock</i>\n{} {} {} {} {} {}",
-                    get_telegram_handle(Username::TheXiao77),
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::DarkTrainer),
-                    get_telegram_handle(Username::Dvdgg),
-                    get_telegram_handle(Username::Victor),
-                    get_telegram_handle(Username::Mario),
+                    Username::TheXiao77.telegram_handle(),
+                    Username::Javi.telegram_handle(),
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Dvdgg.telegram_handle(),
+                    Username::Victor.telegram_handle(),
+                    Username::Mario.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
@@ -120,12 +119,12 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🏛️ <b>BUILD AN EMPIRE!</b>\n\n🗺️ <i>Civilization V</i>\n{} {} {} {} {} {}",
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::DarkTrainer),
-                    get_telegram_handle(Username::Sauturn),
-                    get_telegram_handle(Username::Awe),
-                    get_telegram_handle(Username::Jaime),
-                    get_telegram_handle(Username::Davas),
+                    Username::Javi.telegram_handle(),
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Awe.telegram_handle(),
+                    Username::Jaime.telegram_handle(),
+                    Username::Davas.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
@@ -137,16 +136,16 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🔫 <b>Rush B!</b>\n\n🎯 <i>CS2</i>\n{} {} {} {} {} {} {} {} {} {}",
-                    get_telegram_handle(Username::TheXiao77),
-                    get_telegram_handle(Username::DarkTrainer),
-                    get_telegram_handle(Username::Sauturn),
-                    get_telegram_handle(Username::Awe),
-                    get_telegram_handle(Username::Jaime),
-                    get_telegram_handle(Username::Davas),
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::Red),
-                    get_telegram_handle(Username::DrDvd),
-                    get_telegram_handle(Username::Toxic),
+                    Username::TheXiao77.telegram_handle(),
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Awe.telegram_handle(),
+                    Username::Jaime.telegram_handle(),
+                    Username::Davas.telegram_handle(),
+                    Username::Javi.telegram_handle(),
+                    Username::Red.telegram_handle(),
+                    Username::DrDvd.telegram_handle(),
+                    Username::Toxic.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
@@ -157,11 +156,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🔍 <b>TIME TO HUNT!</b>\n\n👹 <i>Hunt</i>\n{} {} {} {} {}",
-                    get_telegram_handle(Username::DarkTrainer),
-                    get_telegram_handle(Username::Sauturn),
-                    get_telegram_handle(Username::Davas),
-                    get_telegram_handle(Username::Mario),
-                    get_telegram_handle(Username::Toxic),
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Davas.telegram_handle(),
+                    Username::Mario.telegram_handle(),
+                    Username::Toxic.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
@@ -172,11 +171,11 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🔴 <b>GOTTA CATCH 'EM ALL!</b>\n\n⚡ <i>Pokémon GO Squad</i>\n{} {} {} {} {}",
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::DarkTrainer),
-                    get_telegram_handle(Username::Sauturn),
-                    get_telegram_handle(Username::Garfu),
-                    get_telegram_handle(Username::Mario),
+                    Username::Javi.telegram_handle(),
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Garfu.telegram_handle(),
+                    Username::Mario.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
@@ -188,16 +187,16 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 msg.chat.id,
                 format!(
                     "🎨 <b>A dibujar mortadelos!</b>\n\n🖌️ <i>Gartic/Pinturillo</i>\n{} {} {} {} {} {} {} {} {} {}",
-                    get_telegram_handle(Username::TheXiao77),
-                    get_telegram_handle(Username::Javi),
-                    get_telegram_handle(Username::Awe),
-                    get_telegram_handle(Username::Sauturn),
-                    get_telegram_handle(Username::Davas),
-                    get_telegram_handle(Username::Dvdgg),
-                    get_telegram_handle(Username::Victor),
-                    get_telegram_handle(Username::DrDvd),
-                    get_telegram_handle(Username::Jaime),
-                    get_telegram_handle(Username::DarkTrainer),
+                    Username::TheXiao77.telegram_handle(),
+                    Username::Javi.telegram_handle(),
+                    Username::Awe.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Davas.telegram_handle(),
+                    Username::Dvdgg.telegram_handle(),
+                    Username::Victor.telegram_handle(),
+                    Username::DrDvd.telegram_handle(),
+                    Username::Jaime.telegram_handle(),
+                    Username::DarkTrainer.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
