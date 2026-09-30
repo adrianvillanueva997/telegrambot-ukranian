@@ -16,6 +16,7 @@ pub enum Username {
     DrDvd,
     McKay,
     Andres,
+    Snak,
 }
 
 impl Username {
@@ -38,6 +39,7 @@ impl Username {
             Self::DrDvd => "@THEDRDVD",
             Self::McKay => "@DoctorMckay",
             Self::Andres => "@AndresMorenoBlu",
+            Self::Snak => "@snak30",
         }
     }
 }
