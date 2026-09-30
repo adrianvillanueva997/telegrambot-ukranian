@@ -18,7 +18,7 @@ RUN apt-get update && \
 WORKDIR /app
 COPY --from=build /build/target/release/telegrambot_ukranian ./bot
 RUN chown appuser:appuser /app
-USER 1001 
+USER 1000
 ENV RUST_LOG=info
 EXPOSE 8080
 ENTRYPOINT ["./bot"]
