@@ -107,7 +107,7 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                     Username::DarkTrainer.telegram_handle(),
                     Username::Dvdgg.telegram_handle(),
                     Username::Victor.telegram_handle(),
-                    Username::Mario.telegram_handle(),
+                    Username::Snak.telegram_handle(),
                 ),
             )
             .parse_mode(ParseMode::Html)
