@@ -14,7 +14,7 @@ env:
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
       - uses: actions-rust-lang/setup-rust-toolchain@02be93da58aa71fb456aa9c43b301149248829d8
@@ -25,7 +25,7 @@ jobs:
 
   clippy:
     name: Clippy
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: check
     steps:
       - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
@@ -37,7 +37,7 @@ jobs:
       - run: cargo clippy --all-features -- -D warnings
 
   docker_lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container: hadolint/hadolint:latest-alpine
     steps:
       - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
@@ -46,7 +46,7 @@ jobs:
   build_docker:
     name: Build Docker
     needs: [clippy, docker_lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         platform: [linux/amd64]
