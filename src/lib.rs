@@ -65,6 +65,8 @@ pub enum Command {
     Deadlock,
     #[command(description = "Let's play some overwatch")]
     Overwatch,
+    #[command(description = "Let's play some Rust!")]
+    Rust,
 }
 
 /// Executes the specified command.
@@ -94,6 +96,22 @@ pub async fn commands(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()
                 Username::Mario.telegram_handle()
                 ),
             ).parse_mode(ParseMode::Html)
+            .await?
+        }
+
+        Command::Rust => {
+            bot.send_message(
+                msg.chat.id,
+                format!(
+                    "🪨 <b>RUST</b>\n\n<i>La isla de los calvarios desnudos os llama.</i>\n\n{} {} {} {} {}",
+                    Username::DarkTrainer.telegram_handle(),
+                    Username::Sauturn.telegram_handle(),
+                    Username::Javi.telegram_handle(),
+                    Username::Mario.telegram_handle(),
+                    Username::Awe.telegram_handle(),
+                ),
+            )
+            .parse_mode(ParseMode::Html)
             .await?
         }
 
